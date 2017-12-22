@@ -1,0 +1,12 @@
+﻿<div class="backdrop" ng-show="AlertService.GetLoaderVisibility()"></div>
+<div class="loading-panel-wraper" ng-show="AlertService.GetLoaderVisibility()">
+    <div class="loading-panel">
+        <div class="loader-box">
+            <img src="./Images/loading_lite.gif" class="pull-left">
+            <div class="pull-left">
+                <span class="header">Please Wait...</span>
+                <div class="sub-text">{{AlertService.GetLoader().message}}</div>
+            </div>
+        </div>
+    </div>
+</div>  

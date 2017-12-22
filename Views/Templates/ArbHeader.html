@@ -1,0 +1,46 @@
+﻿<div class="header" ng-if="viewHeader">
+    <div class="navbar navbar-default no-margin" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand"><img class="brand_logo" src="./Images/Honda_logo.png" /></a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <!--<li><a href="#/">GHEA Document Library</a></li>-->
+                    <li class="active"><a ng-href="#/request">ARB</a></li>
+                    <!--<li><a>Tooling Standards</a></li>-->
+                </ul>
+            </div>
+            <ul class="nav navbar-nav navbar-right"  >
+                <li class="btn-group"  tooltip-placement="bottom" uib-tooltip="Switch roles" uib-dropdown on-toggle="getswitch()"  style="min-width: 175px;">
+                    <a class="dropdown-toggle profileNameDiv" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false" ng-click="getswitch()" id="single-button" uib-dropdown-toggle>
+                        <div class="profileName ng-binding">{{getProfile().Name}}</div>
+                        <div class="ng-binding">{{getProfile().Role}}</div>
+                        <span class="caret"></span>
+                    </a>
+                    <ul ng-show="IsSwitch()" class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
+
+                        <li >
+                            <a ng-show="getProfile().IsDMalsoAReviewer" class="profileNameDiv" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="SwitchUser(OtherProfile(getProfile()).user1)" style="border-bottom: 1px solid #cecbcb;padding: 3px 14px;min-width: 173px;">
+                                <div class="profileName ng-binding">{{getProfile().Name}}</div>
+                                <div class="ng-binding">{{OtherProfile(getProfile()).user1}}</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a  class="profileNameDiv" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="SwitchUser(OtherProfile(getProfile()).user2)" style="border-bottom: 1px solid #cecbcb;padding: 3px 14px;min-width: 173px;">
+                                <div class="profileName ng-binding">{{getProfile().Name}}</div>
+                                <div class="ng-binding">{{OtherProfile(getProfile()).user2}}</div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class=" profileNameDiv"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="Logout()">
+                                <div class="profileName ng-binding" style="color:red;padding: 7px;"><i style="padding-right:15px" class="glyphicon glyphicon-off"></i>Logout</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

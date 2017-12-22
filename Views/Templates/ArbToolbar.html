@@ -1,0 +1,55 @@
+<div class="container toolbar">
+    <div class="row" style="margin-top:10px; height:60px; margin-bottom:10px;">
+        <div class="col-md-6 leftToolButtons">
+            <div ng-if="viewToolbar">
+                <!--<button class="btn btn-default"  tooltip-placement="top" uib-tooltip="Create new ARB Request" ng-if="ToolbarService.ButtonContext['newRequest'].visible" ng-click="ToolbarService.ButtonContext['newRequest'].handler()">
+                    <img src="./Images/AddIcon.png" class="btnSmall">
+                    <p class="btnSmallText">New Request</p>
+                </button>-->
+                <button class="btn btn-default" ng-if="ToolbarService.ButtonContext['User'].visible" ng-click="ToolbarService.ButtonContext['User'].handler()">
+                    <img src="./Images/User1.png" class="btnSmall">
+                    <p class="btnSmallText">Manage User</p>
+                </button>
+                <button class="btn btn-default"  tooltip-placement="top" uib-tooltip="Return to project list"  ng-if="ToolbarService.ButtonContext['back'].visible" ng-click="ToolbarService.ButtonContext['back'].handler()">
+                    <img src="./Images/back.png" class="btnSmall">
+                    <p class="btnSmallText">Back</p>
+                </button>
+                <button class="btn btn-default"  tooltip-placement="top" uib-tooltip="Save updates" ng-if="ToolbarService.ButtonContext['save'].visible" ng-click="ToolbarService.ButtonContext['save'].handler()">
+                    <img src="./Images/save.png" class="btnSmall">
+                    <p class="btnSmallText">Save</p>
+                </button>
+                <button class="btn btn-default" tooltip-placement="top" uib-tooltip="Cancel this request and return to project list" ng-if="ToolbarService.ButtonContext['cancel'].visible" ng-click="ToolbarService.ButtonContext['cancel'].handler()">
+                    <img src="./Images/cancel.png" class="btnSmall">
+                    <p class="btnSmallText">Cancel</p>
+                </button>
+                <button class="btn btn-default"  tooltip-placement="top" uib-tooltip="Save changes and Submit your request to the ARB"  ng-if="ToolbarService.ButtonContext['submit'].visible" ng-click="ToolbarService.ButtonContext['submit'].handler()">
+                    <img src="./Images/submit.png" class="btnSmall">
+                    <p class="btnSmallText">Submit</p>
+                </button>
+                <label class="btn btn-default"  tooltip-placement="top" uib-tooltip="Attach ARB documents to the request"  ng-if="ToolbarService.ButtonContext['attachFiles'].visible" ng-click="ToolbarService.ButtonContext['attachFiles'].handler()" style="border-color: white;">
+                    <img src="./Images/PaperClip4_Black.png" class="btnSmall">
+                    <input type="file" multiple onchange="angular.element(this).scope().ToolbarService.AttactmentFiles = this.files; angular.element(this).scope().$apply();angular.element(this).scope().ToolbarService.ButtonContext['attachFiles'].handler();"   style="display: none;">
+                    <p class="btnSmallText">Attach File</p>
+                </label>
+                <button class="btn btn-default" ng-if="ToolbarService.ButtonContext['reminder'].visible" ng-click="ToolbarService.ButtonContext['reminder'].handler()">
+                    <img src="./Images/emailreminders.jpg" class="btnSmall">
+                    <p class="btnSmallText">Reminder</p>
+                </button>
+                <button class="btn btn-default" ng-if="ToolbarService.ButtonContext['adminFunctions'].visible" ng-click="ToolbarService.ButtonContext['adminFunctions'].handler()">
+                    <img src="./Images/Gear.png" class="btnSmall">
+                    <p class="btnSmallText">Admin Functions</p>
+                </button>
+                <button class="btn btn-default"  tooltip-placement="top" uib-tooltip="Choose an ARB Request to Copy From, rather than starting from scratch." ng-if="ToolbarService.ButtonContext['copyfrom'].visible" ng-click="ToolbarService.ButtonContext['copyfrom'].handler()">
+                    <img src="./Images/copy-icon-25.png" class="btnSmall">
+                    <p class="btnSmallText">Copy From</p>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-offset-2">
+
+            <div ng-if="AlertService.IsAlertOpened()" uib-alert class="alert no-margin" ng-class="'alert-' + AlertService.GetAlert().type" close="AlertService.CloseAlert()">
+                {{AlertService.GetAlert().message}}
+            </div>
+        </div>
+    </div>
+</div>

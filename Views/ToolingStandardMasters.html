@@ -1,0 +1,251 @@
+﻿<div>
+    <form name="taxonomyCtrl.masterForm">
+        <toaster-container toaster-options="{'time-out': 2000}"></toaster-container>
+        <!-- Domain -->
+        <div ng-if="taxonomyCtrl.ParamType == 'Domain'">
+            <h2>Domain</h2><hr class="pageHR" />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2" style="margin-top:7px">
+                        <label>Domain Name</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="domainName" ng-model="taxonomyCtrl.Domain.DomainName" required /><br />
+                    </div>
+                    <br /><br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" value="Save" class="btn btn-primary" ng-click="taxonomyCtrl.SaveDomain()" />
+                        <input type="button" value="Reset" class="btn btn-default" ng-click="taxonomyCtrl.ResetDomain()" />
+                    </div>
+                    <br /><br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="display compact" id="TaxonomyDomain" arb-data-table="taxonomyCtrl.GrdTaxonomyDomain"></table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category -->
+        <div ng-if="taxonomyCtrl.ParamType == 'Category'">
+            <h2>Category</h2><hr class="pageHR" />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2" style="margin-top:7px">
+                        <label>Category Name</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="categoryName" ng-model="taxonomyCtrl.Category.Name" required /><br />
+                    </div>
+                    <br /><br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" value="Save" class="btn btn-primary" ng-click="taxonomyCtrl.SaveCategory()" />
+                        <input type="button" value="Reset" class="btn btn-default" ng-click="taxonomyCtrl.ResetCategory()" />
+                    </div>
+                    <br /><br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="display compact" id="TaxonomyCategory" arb-data-table="taxonomyCtrl.GrdTaxonomyCategory"></table>
+                </div>
+            </div>
+
+        </div>
+
+        <!--Sub Category -->
+        <div ng-if="taxonomyCtrl.ParamType == 'SubCategory'">
+            <h2>Sub Category</h2><hr class="pageHR" />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2" style="margin-top:7px">
+                        <label>Category</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select id='Category' class="form-control" ng-model="taxonomyCtrl.SubCategory.ParentCategoryID" ng-options="Category.CategoryID as Category.Name for Category in taxonomyCtrl.CategoryList" required>
+                            <option value="" selected="selected">Please Select</option>
+                        </select>
+                    </div>
+                    <br /><br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2" style="margin-top:7px">
+                        <label>Sub-Category Name</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="subCategoryName" ng-model="taxonomyCtrl.SubCategory.Name" required /><br />
+                    </div>
+                    <br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" value="Save" class="btn btn-primary" ng-click="taxonomyCtrl.SaveSubCategory()" />
+                        <input type="button" value="Reset" class="btn btn-default" ng-click="taxonomyCtrl.ResetSubCategory()" />
+                    </div>
+                    <br /><br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="display compact" id="TaxonomySubCategory" arb-data-table="taxonomyCtrl.GrdTaxonomySubCategory"></table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Software And Tools -->
+        <div ng-if="taxonomyCtrl.ParamType == 'SoftwareAndTools'">
+            <h2>Softwares And Tools</h2><hr class="pageHR" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-5" style="margin-top:7px">
+                        <label>Software/Tools Name</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" name="softwareAndToolsName" ng-model="taxonomyCtrl.SoftwareAndTools.Name" required /><br />
+                    </div>
+                    <br /><br />
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-5" style="margin-top:7px">
+                        <label>Version</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="version" ng-model="taxonomyCtrl.SoftwareAndTools.Version" /><br />
+                    </div>
+                    <br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-5" style="margin-top:7px">
+                        <label>Technology Stack</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select id='technologyStack' class="form-control" ng-model="taxonomyCtrl.SoftwareAndTools.TechStackID" ng-options="TechnologyStack.TechStackID as TechnologyStack.Name for TechnologyStack in taxonomyCtrl.TechnologyStacksList" required>
+                            <option value="" selected="selected">Please Select</option>
+                        </select>
+                    </div>
+                    <br /><br />
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-5" style="margin-top:7px">
+                        <label>Life Cycle</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select id='LifeCycle' class="form-control" ng-model="taxonomyCtrl.SoftwareAndTools.LifeCycleID" ng-options="LifeCycle.LifeCycleID as LifeCycle.LifeCycleStage for LifeCycle in taxonomyCtrl.LifeCycleList" required>
+                            <option value="" selected="selected">Please Select</option>
+                        </select>
+                    </div>
+                    <br /><br /><br />
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <input type="submit" value="Save" class="btn btn-primary" style="width:100px" ng-click="taxonomyCtrl.SaveSoftwareAndTools()" />
+                    <input type="button" value="Reset" class="btn btn-default" style="width:100px" ng-click="taxonomyCtrl.ResetSoftwareAndTools()" />
+
+                    <br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="display compact" id="TaxonomySoftwareAndTools" arb-data-table="taxonomyCtrl.GrdTaxonomySoftwareAndTools"></table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Taxonomy Mapping -->
+        <div ng-if="taxonomyCtrl.ParamType == 'TaxonomyMapping'">
+            <h2>Taxonomy Mapping</h2><hr class="pageHR" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-5" style="margin-top:7px">
+                        <label>Domain</label>
+                    </div>
+                    <div class="col-md-5">
+                        <select id='Domain' class="form-control" ng-model="taxonomyCtrl.SelectedTaxonomy.DomainID" ng-options="Domain.DomainID as Domain.DomainName for Domain in taxonomyCtrl.DomainList" required>
+                            <option value="" selected="selected">Please Select</option>
+                        </select>
+                    </div>
+                    <br /><br /><br />
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-3" style="margin-top:7px">
+                        <label>Category</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select id='Category' class="form-control" ng-model="taxonomyCtrl.SelectedTaxonomy.CategoryID" ng-options="Category.CategoryID as Category.Name for Category in taxonomyCtrl.CategoryList"  ng-change="taxonomyCtrl.ChangeCategory()"  required>
+                            <option value="" selected="selected">Please Select</option>
+                        </select>
+                    </div>
+                    <br /><br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-5" style="margin-top:7px">
+                        <label>Sub Category</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select id='SubCategory' class="form-control" ng-model="taxonomyCtrl.SubCategory.ParentCategoryID" ng-options="SubCategory.CategoryID as SubCategory.Name for SubCategory in taxonomyCtrl.SubCategoryList" ng-change="taxonomyCtrl.ChangeSubCategory()" required>
+                            <option value="" selected="selected">Please Select</option>
+                        </select>
+                    </div>
+                    <br /><br /><br />
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-3" style="margin-top:7px">
+                        <label>Software/Tools </label>
+                    </div>
+                    <div class="col-md-9">
+                        <select id='SoftwareAndTools' class="form-control" ng-model="taxonomyCtrl.SubCategory.ParentCategoryID" ng-options="SoftwareAndTools.SoftwareAndToolsID as SoftwareAndTools.Name for SoftwareAndTools in taxonomyCtrl.SoftwareAndToolsList" required>
+                            <option value="" selected="selected">Please Select</option>
+                        </select>
+                    </div>
+                    <br /><br /><br />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <input type="submit" value="Save" class="btn btn-primary" style="width:100px" ng-click="taxonomyCtrl.SaveSoftwareAndTools()" />
+                    <input type="button" value="Reset" class="btn btn-default" style="width:100px" ng-click="taxonomyCtrl.ResetSoftwareAndTools()" />
+
+                    <br /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="display compact" id="TaxonomyOptions" arb-data-table="taxonomyCtrl.TaxonomyOptions"></table>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,21 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: arbweb-deployment
+  namespace: honda
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: arbweb
+        image: registry.k8s/arbweb:IMG_ID
+        resources:
+          limits:
+            cpu: 300m
+            memory: 750Mi
+        ports:
+        - containerPort: 80

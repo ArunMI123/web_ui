@@ -1,0 +1,820 @@
+.color-primary-0 {
+    color: #CD5C5C;
+}
+/* Main Primary color */
+.color-primary-1 {
+    color: #FFC3C3;
+}
+
+.color-primary-2 {
+    color: #F59595;
+}
+
+.color-primary-3 {
+    color: #A63232;
+}
+
+.color-primary-4 {
+    color: #7A0F0F;
+}
+
+.color-secondary-1-0 {
+    color: #377B7B;
+}
+/* Main Secondary color (1) */
+.color-secondary-1-1 {
+    color: #8FBBBB;
+}
+
+.color-secondary-1-2 {
+    color: #5A9393;
+}
+
+.color-secondary-1-3 {
+    color: #1E6464;
+}
+
+.color-secondary-1-4 {
+    color: #094949;
+}
+
+.color-secondary-2-0 {
+    color: #9CBF56;
+}
+/* Main Secondary color (2) */
+.color-secondary-2-1 {
+    color: #E0F4BA;
+}
+
+.color-secondary-2-2 {
+    color: #C7E58B;
+}
+
+.color-secondary-2-3 {
+    color: #779B2F;
+}
+
+.color-secondary-2-4 {
+    color: #51720E;
+}
+
+body {
+    font-family: arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+; error {
+    border: 2px solid red;
+}
+
+; #divMain {
+    width: 100%;
+    height: 1650px;
+}
+
+.divLeftCol {
+
+    height: 100%;
+    background-color: #cd5c5c;
+    /*border: 1px solid blue;*/
+    padding: 6px;
+    font-size: small;
+    padding-bottom: 4000px;
+    margin-bottom: -4000px;
+    height: 100%;
+}
+
+.divRightCol {
+    position: relative;
+    float: left;
+    width: 70%;
+    color: #377B7B;
+    padding: 8px;
+}
+
+div.container {
+    width: 90%;
+}
+
+.buttonDiv {
+    height: 32px;
+    width: 32px;
+    color: white;
+}
+
+.leftColText {
+    color: white;
+    font-family: "verdana", sans-serif, serif;
+    font-size: small;
+}
+
+.divLeftCol h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: -10px;
+    background-color: #A63232;
+    padding: 4px;
+    font-size: 1.4em;
+}
+
+.divLeftCol .form-group label{
+   color: white;
+   font-size: 1.1em;
+}
+.divLeftCol .form-control{
+    width: 90%;
+    height: 25px;
+    padding: 3px 6px;
+}
+.divLeftCol h3 {
+    font-family: "arial", sans-serif, serif;
+    color: white;
+    margin-bottom: 3px;
+}
+
+.divLeftCol select {
+    margin-left: 20px;
+    margin-bottom: 0px;
+    width: 90%;
+}
+
+.comments {
+    color: white;
+    font-size: small;
+    font-style: italic;
+}
+
+/* Menu Stuff */
+.divButtons {
+    float: left;
+    font-family: "verdana" sans-serif serif;
+    padding: 3px;
+    margin: 2px;
+    border: 3px solid white;
+    height: 65px;
+}
+
+    /* 
+These are not working correctly right now.  Need to fix. 
+The button disappears when I put it in a div.
+
+.btnInline {
+	position: absolute;
+	z-index: -1;
+	font-family: "verdana" sans-serif serif;
+	padding: 3px;
+	margin: 2px;
+   border: 3px solid white;
+   height: 65px;	
+}
+
+.btnInline:hover {
+	position: absolute;
+	z-index: -1;
+	font-family: "verdana" sans-serif serif;
+	padding: 3px;
+	margin: 2px;
+   border: 3px solid white;
+   height: 65px;	
+}
+*/
+    .divButtons img {
+        margin-top: -10px;
+    }
+    .leftToolButtons{
+        padding-left: 0px;
+    }
+    .leftToolButtons button{
+        width: 63px;
+        padding: 6px 6px;
+        padding-top: 2px;
+        height: 60px;
+        border-color: #FFF;
+    }
+
+    .leftPanelButtons button:not(:hover):not(:active):not(:focus){
+        background-color:#A63232;
+        border-color: #882a2a;
+        color: white;
+    }
+    .manageButton button{
+        width: 65px;
+        height: 65px;
+        margin-top: 10px;
+
+    }
+
+.btnSmall {
+    width: 30px;
+}
+
+.btnSmallText {
+    margin: 0;
+    font-size: 0.7em;
+    font-weight: 100;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.divButtons:hover {
+    border: 3px dotted #F59595;
+    padding: 3px;
+    margin: 2px;
+    /*background-color: #F59595;*/
+    height: 65px;
+}
+
+.divButtons a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+    .divButtons a:active {
+        border-top: 3px solid orange;
+        text-decoration: none;
+    }
+
+#mnuMain {
+    width: 98%;
+    height: 80px;
+}
+
+    #mnuMain fieldset {
+        font-family: "verdana" sans-serif serif;
+    }
+
+.mnuRequestForm {
+    /*position: fixed;*/
+    height: 80px;
+    background-color: white;
+    width: 100%;
+}
+
+.notImplemented {
+    display: none;
+}
+
+
+.resultDispHdr {
+    margin-left: 5px;
+    color: white;
+}
+
+.resultDisp {
+    color: yellow;
+    float: right;
+    margin-right: 3px;
+}
+
+.messageArea {
+    color: red;
+    font-size: small;
+}
+
+img {
+    border: 0;
+    padding: 2px;
+}
+
+/*.questionSpan {
+    position: absolute;
+    left: 70%;
+}*/
+
+    .questionSpan:hover {
+        background-color: silver;
+    }
+
+.statusPanel {
+    border: 3px solid #51720E;
+    color: #51720E;
+    float: right;
+    padding: 8px;
+    font-family: verdana, cursive, sans-serif;
+    font-size: small;
+    text-align: center;
+    background-color: #E0F4BA;
+    height: 50px;
+    width: 300px;
+    position: relative;
+}
+
+.instructions {
+    padding: 5px;
+    color: white;
+    font-size: medium;
+}
+
+.commentsLbl {
+    color: white;
+    font-size: small;
+}
+
+.actionItemCol0Hdr {
+    background-color: #5A9393;
+    color: white;
+    padding: 4px;
+    font-size:10px;
+}
+
+.actionItemCol1Hdr {
+    background-color: #5A9393;
+    color: white;
+    width: 25%;
+    padding: 4px;
+}
+
+.actionItemCol2Hdr {
+    background-color: #5A9393;
+    color: white;
+    width: 53%;
+    padding: 4px;
+}
+
+.actionItemCol3Hdr {
+    background-color: #5A9393;
+    color: white;
+    width: 20%;
+    padding: 4px;
+}
+
+.actionItemCol4Hdr {
+    background-color: #5A9393;
+    color: white;
+    width: 10%;
+    padding: 4px;
+}
+
+.actionItemsCol0 {
+    vertical-align: top;
+    text-align: center;
+}
+
+.actionItemsCol1 {
+    width: 25%;
+    vertical-align: top;
+    text-align: center;
+}
+
+.actionItemsCol2 {
+    width: 53%;
+    vertical-align: top;
+}
+
+.actionItemsCol3 {
+    width: 20%;
+    vertical-align: top;
+    text-align: center;
+}
+
+.actionItemRow:hover {
+    background-color: #5A9393;
+}
+
+.commentsTextArea {
+    width: 100% !important;
+    height: 120px !important;
+    margin-bottom: 6px;
+    resize: vertical;
+}
+
+.black_overlay {
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 1001;
+    -moz-opacity: 0.8;
+    opacity: .80;
+    filter: alpha(opacity=80);
+}
+
+.white_content {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 20%;
+    height: 10%;
+    padding: 16px;
+    background-color: white;
+    z-index: 1002;
+    overflow: auto;
+}
+
+.textAreaHighlight {
+    background-color: #F0F8FF !important;
+    padding: 6px !important;
+    width: 75% !important;
+}
+
+.mainDiv {
+    font-family: "verdana", sans-serif, serif;
+}
+
+.divButton {
+    display: inline-block;
+    background-color: blue;
+    color: white;
+    padding: 8px;
+    float: left;
+    width: 30%;
+    margin-right: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+
+    .divButton a {
+        text-decoration: none;
+        color: white;
+        float: left;
+    }
+
+.divDelete {
+    float: right;
+}
+
+    .divDelete span:hover {
+        color: yellow;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+.content {
+	width: 300px;
+	height: 100px;
+
+	position:absolute; /*it can be fixed too*/
+	left:0; right:0;
+	top:0px; bottom:0;
+	margin:auto;
+
+    background-color: white;
+
+	/*this to solve "the content will not be cut when the window is smaller than the content": */
+	max-width:100%;
+	max-height:100%;
+	overflow:auto;
+	border: 6px solid orange;
+	padding: 6px;
+	z-index: 2147483647;
+    			
+	-moz-box-shadow: 3px 4px 0px 0px #899599;
+	-webkit-box-shadow: 3px 4px 0px 0px #899599;
+	box-shadow: 3px 4px 0px 0px #899599;
+}
+
+#dialog-form {
+	
+}
+
+#dialog-form label, input {
+	display: block;
+}
+
+#dialog-form input.text {
+	margin-bottom: 12px;
+	width: 95%;
+	padding: .4em;
+}
+
+#dialog-form fieldset {
+	padding: 0;
+	border: 0;
+	margin-top: 15px;
+}
+
+#dialog-form .ui-dialog .ui-state-error {
+	padding: .3em;
+}
+
+#dialog-form .validateTips {
+	border: 1px solid transparent;
+	padding: 0.3em;
+}
+
+#dialog-form .checkbox-grid li {
+	display: block;
+	float: left;
+	width: 25%;
+	margin-left: -18px;
+}
+
+#dialog-form label, input {
+	display: inline;
+}
+
+/* Corner radius */
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-left,
+.ui-corner-tl {
+	border-top-left-radius: 4px;
+}
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-right,
+.ui-corner-tr {
+	border-top-right-radius: 4px;
+}
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-left,
+.ui-corner-bl {
+	border-bottom-left-radius: 4px;
+}
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-right,
+.ui-corner-br {
+	border-bottom-right-radius: 4px;
+}
+
+/* Component containers
+----------------------------------*/
+.ui-widget-content {
+	border: 1px solid #aaaaaa;
+	background: #ffffff url("images/ui-bg_flat_75_ffffff_40x100.png") 50% 50% repeat-x;
+	color: #222222;
+}
+
+.ui-widget {	
+	font-size: small !important;
+}
+
+.ui-dialog {
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	padding: .2em;
+	outline: 0;
+}
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em 1em;
+	position: relative;
+}
+.ui-dialog .ui-dialog-title {
+	float: left;
+	margin: .1em 0;
+	white-space: nowrap;
+	width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.ui-dialog .ui-dialog-titlebar-close {
+	position: absolute;
+	right: .3em;
+	top: 50%;
+	width: 20px;
+	margin: -10px 0 0 0;
+	padding: 1px;
+	height: 20px;
+}
+.ui-dialog .ui-dialog-content {
+	position: relative;
+	border: 0;
+	padding: .5em 1em;
+	background: none;
+	overflow: auto;
+}
+.ui-dialog .ui-dialog-buttonpane {
+	text-align: left;
+	border-width: 1px 0 0 0;
+	background-image: none;
+	margin-top: .5em;
+	padding: .3em 1em .5em .4em;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+	float: right;
+}
+.ui-dialog .ui-dialog-buttonpane button {
+	margin: .5em .4em .5em 0;
+	cursor: pointer;
+}
+.ui-dialog .ui-resizable-se {
+	width: 12px;
+	height: 12px;
+	right: -5px;
+	bottom: -5px;
+	background-position: 16px 16px;
+}
+
+.projInfoSpace
+{
+    float:left;
+    margin: 1px 20px 1px 1px;
+}
+
+.bottomSpacing
+{
+    margin-bottom:10px;
+}
+
+.topSpacing
+{
+    margin-top:10px !important;
+}
+
+div.AlertDiv{
+	position: fixed;z-index: 2147483647 !important;opacity: 
+	0.8;overflow: hidden;
+	text-align: center; 
+	top: 0; left: 0;
+	height: 200%;width: 100%;
+	padding-top:20%;
+	background-color:Gray;
+	filter:alpha(opacity=60);/*opacity:0.60; */
+}
+
+.grid-form legend{
+    margin-bottom: 0px;
+}
+
+.grid-form select.form-control{
+    height: 21px;
+}
+
+/*Util Classes */
+.no-margin{
+    margin: 0px;
+}
+
+/* Login Page */
+.divLogin {
+    
+    background-color: #FFF;
+    border: 1px solid rgba(0,0,0,0.1);  
+    border-radius: 8px;
+    -moz-box-shadow: 3px 3px 3px rgba(50,50,50,0.28);
+    -webkit-box-shadow: 3px 3px 3px rgba(50,50,50,0.28);
+    box-shadow: 3px 3px 3px rgba(50,50,50,0.28)
+}
+
+.divTitle{
+        padding: 10px;
+    border-radius: 6px;
+    margin-top: 15px;
+    background: red;
+    font-size:20px;
+}
+
+div.container.toolbar{
+    min-height: 40px;
+}
+
+/* Header */
+.brand_logo{
+    width:120px;
+}
+
+/* Loading */
+  .backdrop,loading-panel,.loading-panel-wraper{
+    position: absolute; 
+    left: 0px; 
+    top: 0px; 
+    right: 0px; 
+    bottom: 0px;
+    position: fixed;
+  }
+  .backdrop{
+    background: rgba(0,0,0,0.2);
+    z-index: 1000;
+    overflow: hidden;
+    
+  }
+  .loading-panel-wraper{
+    overflow: hidden;
+    z-index: 10001;
+    
+  }
+  .loading-panel{
+      overflow: hidden;
+  }
+
+
+  .loader-box{
+    vertical-align: middle;
+    margin-top: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70px;
+    width: 250px;
+    border: 1px solid #a9a7a7;
+    background-color: #ffffff;
+    padding-top: 13px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow:    6px 6px 6px rgba(54,54,54,0.03), -6px 6px 6px rgba(54,54,54,0.03), 6px -6px 6px rgba(54,54,54,0.03), -6px -6px 6px rgba(54,54,54,0.03);
+    -webkit-box-shadow: 6px 6px 6px rgba(54,54,54,0.03), -6px 6px 6px rgba(54,54,54,0.03), 6px -6px 6px rgba(54,54,54,0.03), -6px -6px 6px rgba(54,54,54,0.03);
+    box-shadow:         6px 6px 6px rgba(54,54,54,0.03), -6px 6px 6px rgba(54,54,54,0.03), 6px -6px 6px rgba(54,54,54,0.03), -6px -6px 6px rgba(54,54,54,0.03);
+    
+  }
+
+  .loader-box img{
+    vertical-align: middle;
+    margin: 10px;
+  }
+
+  .loader-box .header{
+    
+    font-size: 16px;
+    font-weight: 600;
+    
+  }
+
+  .uib-daypicker .btn-default:not(:hover):not(:active){
+      border-color: white;
+  }
+
+  .profileNameDiv{
+      padding-bottom: 5px !important;
+      padding-top: 5px !important;
+  }
+  .profileNameDiv span{
+      position:absolute;
+      top: 50%;
+      right: 10px;
+  }
+  .profileNameDiv .profileName{
+      font-weight: bold;
+  }
+
+  .border-red{
+    border: #e96666 solid 1px !important;
+    outline: 0;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px rgba(233,102,102,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px rgba(233,102,102,.6);
+  }
+
+  .border-black{
+    border: #e96666 solid 1px !important;
+    outline: 0;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px rgba(233,102,102,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px rgba(233,102,102,.6);
+  }
+
+  .color-red{
+      color: red !important;
+  }
+
+.logout{
+    margin-top: 50px;
+}
+
+.buttonInstruction {
+    padding: 8px;
+    color: white;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.color-yellow {
+     color: yellow;
+}
+
+.leftColDate {
+font-size: 18px;
+font-weight: bold;
+text-align: center;
+}
+
+.resultsSectionDiv {
+    border:3px solid white; 
+    margin-bottom: 3px; 
+    background-color: black;
+}
+.tablefont{
+font-size:12px;
+font-family:arial, sans-serif;
+
+}
+
+.QuestionCss{
+   font-size:13px;
+   font-family:arial, sans-serif;
+}
+
+fieldset_disable {
+    pointer-events: none
+}
+table.dataTable tbody th, table.dataTable tbody td
+{
+        padding: 8px 18px;
+}
+.tooltip .tooltip-inner {
+    font-size:x-small;
+    background-color:GrayText;
+}

@@ -1,0 +1,117 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Architecture Review Board</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="libs/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/angular-bootstrap/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href='libs/data-table/jquery.dataTables.min.css' />
+    <link rel="stylesheet" href="libs/gridforms/gridforms.css" />
+    <link rel="stylesheet" href="styles/arb2.css" />
+    <link rel="stylesheet" href="libs/ui-select/select.css"  />
+    <link href="libs/Multiselect/select2.css" rel="stylesheet" />
+    <link href="libs/Multiselect/selectize.default.css" rel="stylesheet" />
+   <!-- endbuild -->
+</head>
+<body ng-app="arbApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+    <arb-loading></arb-loading>
+    <arb-header></arb-header>
+    <arb-toolbar></arb-toolbar> 
+
+    <div class="container">
+        <!--We have to add this button in UserLogin.html because it is main page-->
+        <!--Please UserLogin.html-->
+        <!--<input type="button" value="Press Me" title="Press Me" onclick="" /><br />-->
+        <div ng-view=""></div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <br />
+            <center><p class="text-muted">&copy; 2016 American Honda Motor Co.</p></center>
+        </div>
+    </div>
+
+    <!--<!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!--<script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>-->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!--<script src="libs/angularjs/angular.min.js"></script>-->
+    <script src="libs/angularjs/angular.js"></script>
+    <script src="libs/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="libs/angular-route/angular-route.min.js"></script>
+    <script src="libs/angular-cookies/angular-cookies.min.js"></script>
+    <script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src='libs/data-table/jquery.dataTables.min.js'></script>
+    <script src="libs/ui-select/select.js"></script>
+    <script src="libs/Multiselect/angular-sanitize.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!--Config -->
+    <script src="scripts/config/Module.js"></script>
+    <script src="scripts/config/Config.js"></script>
+    <script src="scripts/constants/Module.js"></script>
+    <script src="scripts/constants/ReviewConstants.js"></script>
+    <script src="scripts/config/HttpProvider.js"></script>
+
+    <!-- Configs -->
+    <!--Services -->
+    <script src="scripts/services/Module.js"></script>
+    <script src="scripts/services/RequestService.js"></script>
+    <script src="scripts/services/UserService.js"></script>
+    <script src="scripts/services/DataAccessService.js"></script>
+    <script src="scripts/services/ReviewService.js"></script>
+    <script src="scripts/services/AlertService.js"></script>
+    <script src="scripts/services/UtilService.js"></script>
+    <script src="scripts/services/ToolbarService.js"></script>
+    <script src="scripts/services/WorkFlowService.js"></script>
+
+    <!-- Services -->
+    <!--Controllers -->
+    <script src="scripts/controllers/RequestController.js"></script>
+    <script src="scripts/controllers/LoginController.js"></script>
+    <script src="scripts/controllers/WorkQueueController.js"></script>
+    <script src="scripts/controllers/WorkQueuePopupController.js"></script>
+    <script src="scripts/controllers/ManageUserController.js"></script>
+    <!--Controllers -->
+    <!--Directives -->
+    <script src="scripts/directives/Module.js"></script>
+    <script src="scripts/directives/ArbHeaderDirective.js"></script>
+    <script src="scripts/directives/ArbToolbarDirective.js"></script>
+    <script src="scripts/directives/ArbDataTableDirective.js"></script>
+    <script src="scripts/directives/ArbLoadingDirective.js"></script>
+    <script src="scripts/directives/UtilDirectives.js"></script>
+    <!-- Directives -->
+
+    <script src="scripts/app.js"></script>
+
+    <script>
+        function testSP() {
+            PageMethods.InsertSPItem("John", OnSuccess, OnFailure)
+            return false;
+        }
+        function OnSuccess(response) {
+            alert(response);
+        }
+        function OnFailure(error) {
+            alert(error);
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<div>
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="manageConditionCtrl.CloseModal()" aria-label="Close"><span aria-hidden="true" data-dismiss="modal">&times;</span></button>
+        <h5 class="modal-title">
+            <span class='projInfoSpace'>
+                <span style="font-weight:bolder">Project ID:</span>
+                <span id="spnProjId">{{manageConditionCtrl.Request.ProjectID}}</span>
+            </span>
+            <span class='projInfoSpace'>
+                <span style="font-weight:bolder">Project Name:</span>
+                <span id="spnProjName">{{manageConditionCtrl.Request.ProjectName}}</span>{{}}
+            </span>
+            <span class='projInfoSpace'>
+                <span style="font-weight:bolder">Phase:</span>
+                <span id="spnPhase">{{manageConditionCtrl.Request.Phase}}</span>
+            </span>
+
+        </h5>
+    </div>
+
+    <div class="modal-body" id="modal-body">
+        <div ng-if="manageConditionCtrl.IsAlert" class="container" style="margin-left:-9em;width:auto">
+            <div class="col-md-3 col-md-offset-4 col-lg-5 col-lg-offset-4 col-sm-5 col-sm-offset-4 col-xs-12 " style="position: absolute;    top: 1%;    left: 0px;    margin: auto;    right: 0px;    width: 50%;    background-color: #393838;    opacity: 1;    float: left;">
+                <div uib-alert style="color:white;margin: 0;" close="manageConditionCtrl.CloseAlert()">
+                    <span>{{manageConditionCtrl.AlertMessage}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" style="height:55px">
+                <span style="font-size: large;">{{manageConditionCtrl.ConditionHeader}}</span>
+                <button class="btn btn-default btn-xs pull-right" ng-click="manageConditionCtrl.AddCondition()" ng-if="manageConditionCtrl.CheckAddButton() && manageConditionCtrl.Request.Stage != manageConditionCtrl.Checkstage" style="width: 6%;margin-top: -8px;">
+
+                    <img src="./Images/submit.png" class="btnSmall">
+                    <p class="btnSmallText" style="font-size: 0.9em;">Add</p>
+                </button>
+            </div>
+
+            <div class="panel-body">
+                <table arb-data-table="manageConditionCtrl.ConditionsTableOptions" ng-if="manageConditionCtrl.ConditionsTableOptions.data.length > 0"></table>
+                <p ng-if="manageConditionCtrl.ConditionsTableOptions.data.length == 0 && manageConditionCtrl.Request.Stage!=manageConditionCtrl.Checkstage && manageConditionCtrl.CheckAddButton()">Please add your conditions here.</p>
+                <p ng-if="manageConditionCtrl.ConditionsTableOptions.data.length == 0 &&( manageConditionCtrl.Request.Stage ==manageConditionCtrl.Checkstage || !manageConditionCtrl.CheckAddButton())">No Conditions Added.</p>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-if="manageConditionCtrl.ConditionDisplayFlag">
+            <div class="panel-heading">Condition Detail</div>
+            <div class="panel-body">
+
+                <fieldset ng-disabled="!manageConditionCtrl.CheckAdder() || manageConditionCtrl.Request.Stage==manageConditionCtrl.Checkstage ||manageConditionCtrl.Condition.DateClosed != null">
+                    <div class="col-md-12">
+                        <label style="margin-top: 0px;">Concern Type</label>
+                        <div class="container">
+                            <div class="checkbox col-md-3" ng-repeat="riskCategory in manageConditionCtrl.RiskCategories " style="margin-top: -5px;">
+                                <label>
+                                    <input type="checkbox" name="RiskCheck" ng-model="risk[riskCategory.Key]" ng-click="manageConditionCtrl.AddRisk(riskCategory,risk[riskCategory.Key])" ng-checked="manageConditionCtrl.AssignedRisk.indexOf(riskCategory.Key) !== -1">{{riskCategory.Value}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-12">
+                        <label for="comments">Concern Description</label>
+                        <textarea name="concernComments" id="concernComments" class="form-control input-sm" style="height: 70px; width: 100%;" ng-model="manageConditionCtrl.Condition.RiskCategoryComments"></textarea>
+                    </div>
+                    
+                    <div class="col-md-12 form-horizontal" style="margin-top:15px;">
+                        <div class="form-group col-md-6">
+                            <label class="col-sm-4 text-left control-label" style="text-align: left;">Type</label>
+                            <div class="col-sm-6">
+                                <select id='actionItemType' class="form-control input-sm" ng-model="manageConditionCtrl.Condition.ActionItemType" ng-options="actiontype.ActionItemTypeID as actiontype.ActionItemType1 for actiontype in manageConditionCtrl.ActionTypes | filter:{ParentLevel:1}">
+                                    <option value="">Select One</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-sm-4 text-left control-label" style="text-align: left;">Sub Type</label>
+                            <div class="col-sm-6">
+                                <select id='actionItemType' class="form-control input-sm" ng-model="manageConditionCtrl.Condition.ActionItemSubType" ng-options="actiontype.ActionItemTypeID as actiontype.ActionItemType1 for actiontype in manageConditionCtrl.ActionTypes | filter:{ParentLevel:2}">
+                                    <option value="">Select One</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12  form-horizontal">
+                        <div class="form-group col-md-6">
+                            <label class="col-sm-4 text-left control-label" style="text-align: left;">Due Date</label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input class="form-control input-sm" type="text" uib-datepicker-popup="MM/dd/yyyy" datepicker-options="manageConditionCtrl.Mindate" is-open="request._template.dateDue" ng-model="manageConditionCtrl.Condition.DueByDate" />
+                                    <span class="input-group-btn input-group-sm">
+                                        <button type="button" ng-click="request._template.dateDue = !request._template.dateDue" class="btn btn-default input-sm">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-sm-4 text-left control-label" style="text-align: left;">Due By Event </label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input class="form-control input-sm" type="text" maxlength="3" ng-model="manageConditionCtrl.Condition.DueByEvent" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-sm-4 text-left control-label" style="text-align: left;">Resolution Strategy</label>
+                            <div class="col-sm-6">
+                                <select id='resolutionType' class="form-control input-sm" ng-model="manageConditionCtrl.Condition.ResolutionStrategy" ng-options="resolutiontype.ResolutionStrategyID as resolutiontype.Description for resolutiontype in manageConditionCtrl.ResolutionTypes">
+                                    <option value="">Select One</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6" ng-if="manageConditionCtrl.IsDomain">
+                            <label class="col-sm-4 text-left control-label" style="text-align: left;">Domain</label>
+                            <div class="col-sm-6">
+                                <select id='resolutionType' class="form-control input-sm" ng-model="manageConditionCtrl.Condition.DomainID" ng-options="Domains.Domain.DomainID as Domains.Domain.DomainName for Domains in manageConditionCtrl.DomainList">
+                                    <option value="">Select One</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <label for="comments">Condition Description</label>
+                        <textarea name="comments" id="comments" class="form-control input-sm" style="height: 70px; width: 100%;" ng-model="manageConditionCtrl.Condition.ActionItemText"></textarea>
+                    </div>
+                   
+                </fieldset>
+                <div ng-if="manageConditionCtrl.Condition.ActionItemID != null">
+                    <div class="col-md-12" style="margin-top:10px;">
+                        <h4 style="margin-top: 0px;">Resolution</h4>
+                    </div>
+                    <form class="form-horizontal" name="manageConditionCtrl.manageConditionForm">
+                        <div class="form-group col-md-6">
+                            <label class="col-sm-6 text-left control-label" ng-class="{'color-red' : manageConditionCtrl.manageConditionForm.DateResolved.$touched && !manageConditionCtrl.IsRealValueCheck(manageConditionCtrl.Condition.DateResolved) }">Date Resolved</label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input name="DateResolved" ng-disabled="!manageConditionCtrl.CheckResolvers()||manageConditionCtrl.Request.Stage==manageConditionCtrl.Checkstage ||manageConditionCtrl.Condition.DateClosed != null" class="form-control input-sm" type="text" uib-datepicker-popup="MM/dd/yyyy" is-open="request._template.dateResolvedFlag" datepicker-options="manageConditionCtrl.Mindate" ng-model="manageConditionCtrl.Condition.DateResolved" ng-class="{'border-red' : manageConditionCtrl.manageConditionForm.DateResolved.$touched && !manageConditionCtrl.IsRealValueCheck(manageConditionCtrl.Condition.DateResolved) }" />
+                                    <span class="input-group-btn input-group-sm">
+                                        <button ng-disabled="!manageConditionCtrl.CheckResolvers()||manageConditionCtrl.Request.Stage==manageConditionCtrl.Checkstage||manageConditionCtrl.Condition.DateClosed != null" type="button" ng-click="request._template.dateResolvedFlag = !request._template.dateResolvedFlag" class="btn btn-default input-sm" ng-class="{'border-red' : manageConditionCtrl.manageConditionForm.DateResolved.$touched && !manageConditionCtrl.IsRealValueCheck(manageConditionCtrl.Condition.DateResolved) }">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4  pull-right">
+                            <div class="checkbox" ng-if="manageConditionCtrl.CheckRole('DM')">
+                                <label>
+                                    <input ng-disabled="manageConditionCtrl.Request.Stage==manageConditionCtrl.Checkstage " type="checkbox" value="Closed" ng-model="manageConditionCtrl.Condition.isClosed" /> Closed
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="resolutionComments">Comments</label>
+                            <textarea ng-disabled="!manageConditionCtrl.CheckResolvers()||manageConditionCtrl.Request.Stage==manageConditionCtrl.Checkstage ||manageConditionCtrl.Condition.DateClosed != null" name="resolutionComments" class="form-control input-sm" style="height: 70px; width: 100%;" ng-model="manageConditionCtrl.Condition.Resolution"></textarea>
+                        </div>
+                        <br /><br /><br />
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <br />
+                                <label>Attached documents: </label>
+                                <div ng-repeat="attachment in manageConditionCtrl.Condition.ActionItemAttachments" style="margin:5px;">
+                                    <div class="btn-group">
+                                        <button class="btn btn-default" ng-click="manageConditionCtrl.OpenAttachment('api/Attachments/' + manageConditionCtrl.Condition.RequestID +'/condition/' + attachment.ActionItemID +'/'+attachment.AttachmentLocation,attachment)">
+                                            {{attachment.AttachmentName}}
+                                        </button>
+                                        <button ng-disabled="!manageConditionCtrl.CheckResolvers()||manageConditionCtrl.Request.Stage==manageConditionCtrl.Checkstage || manageConditionCtrl.Condition.DateClosed!= null " class="btn btn-default" ng-click="manageConditionCtrl.DeleteAttachment(attachment)" style="padding:2px;">
+                                            <img src="./Images/close.png" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <p ng-if="manageConditionCtrl.Condition.ActionItemAttachments.length < 1"> No attachments found for this action item.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12" style="margin-top: 20px;">
+                                    <label>New Attachments: </label>
+                                    <div ng-repeat="attachment in manageConditionCtrl.AttactmentFiles" style="margin:5px;"> <a role="button">{{attachment.name}}</a></div>
+                                    <div>
+                                        <label class="btn btn-default btn-file" ng-disabled="!manageConditionCtrl.CheckResolvers()||manageConditionCtrl.Request.Stage==manageConditionCtrl.Checkstage ||manageConditionCtrl.Condition.DateClosed != null">
+                                            <i class="glyphicon glyphicon-paperclip"></i> Attach Files
+                                            <input type="file" ng-disabled="!manageConditionCtrl.CheckResolvers()||manageConditionCtrl.Request.Stage==manageConditionCtrl.Checkstage ||manageConditionCtrl.Condition.DateClosed != null" multiple onchange="angular.element(this).scope().manageConditionCtrl.AttactmentFiles = this.files; angular.element(this).scope().$apply();" style="display: none;">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="pull-left" style="padding-left: 10px;">
+                        <button type="button" class="btn btn-danger" ng-click="manageConditionCtrl.DeleteCondition()" ng-if="manageConditionCtrl.CheckRole('DM') && manageConditionCtrl.Request.Stage<8 && manageConditionCtrl.Condition.ActionItemID != null">Delete</button>
+                    </div>
+                    <div class="pull-right" style=" padding-right: 10px;">
+                        <span ng-if="(manageConditionCtrl.CheckRole('DM') || manageConditionCtrl.Condition.DateClosed==null) && manageConditionCtrl.Request.Stage!=manageConditionCtrl.Checkstage">
+                            <button type="button" class="btn btn-primary " ng-click="manageConditionCtrl.SaveCondition()"
+                                    ng-if="manageConditionCtrl.CheckAdder()">
+                                Save
+                            </button>
+                        </span>
+                        <span ng-if="manageConditionCtrl.Condition.ActionItemID !=null && manageConditionCtrl.Condition.DateClosed==null && manageConditionCtrl.Request.Stage!==manageConditionCtrl.Checkstage">
+                            <button  tooltip-placement="top" uib-tooltip="Resolve a Condition by entering the Date Resolved and entering Comments."  type="button" class="btn btn-success " ng-click="manageConditionCtrl.ResolveCondition()" ng-if="manageConditionCtrl.CheckResolvers()"> Resolve</button>
+                        </span>
+                        <button type="button" class="btn btn-default " ng-click="manageConditionCtrl.CancelConditionDetailView()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

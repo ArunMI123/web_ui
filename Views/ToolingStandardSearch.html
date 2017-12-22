@@ -1,0 +1,64 @@
+﻿<div class="row row-grid">
+    <div class="col-md-3" data-field-span="1" style="margin-bottom:10px">
+        <br />
+        <label>Region</label>
+        <select id='Domain' class="form-control" ng-model="TaxonomyCtrl.SelectedTaxonomy.Region_TaxonomyToolsMapping.RegionID" ng-options="Region.RegionID as Region.RegionName for Region in TaxonomyCtrl.RegionList | uniqueFilter: 'RegionID' " ng-change="TaxonomyCtrl.FilterTaxonomy()">
+            <option value="" selected="selected">All</option>
+
+        </select>
+    </div>
+  
+    </div>
+    <div class="row row-grid">
+
+        <div class="col-md-3 " data-field-span="1">
+            <label>Domain</label>
+            <!--<input type="text" ng-model="selectedSkill" typeahead="mSkill as mSkill for mSkill in TaxonomyCtrl.EventList.Category"
+                   ng-change="validateDropdowns()" class="form-control" />-->
+            <select id='Domain' class="form-control" ng-model="TaxonomyCtrl.SelectedTaxonomy.Domain" ng-options="TaxonomyList.Domain as TaxonomyList.Domain for TaxonomyList in TaxonomyCtrl.TaxonomyList | uniqueFilter: 'Domain' " ng-change="TaxonomyCtrl.FilterTaxonomy()">
+                <option value="" selected="selected">All</option>
+
+            </select>
+
+        </div>
+        <div class="col-md-3" data-field-span="1">
+            <label>Category</label>
+            <!--<input type="text" ng-model="selectedSkill" typeahead="mSkill as mSkill for mSkill in skillList | dropdownfilter:$viewValue:'mSkill'"
+                   ng-change="validateDropdowns()" class="form-control" />-->
+
+            <!--<select id='Category' class="form-control" ng-model="TaxonomyCtrl.SelectedTaxonomy.CategoryID" ng-options="TaxonomyList.CategoryID as TaxonomyList.Category for TaxonomyList in TaxonomyCtrl.TaxonomyList | uniqueFilter: 'Category' " ng-change="TaxonomyCtrl.FilterTaxonomy()">
+                <option value="" selected="selected">All</option>
+            </select>-->
+
+            <select id='Category' class="form-control" ng-model="TaxonomyCtrl.SelectedTaxonomy.CategoryID" ng-options="CategoryList.CategoryID as CategoryList.Name for CategoryList in TaxonomyCtrl.CategoryList | uniqueFilter: 'Name' " ng-change="TaxonomyCtrl.FilterTaxonomy()">
+                <option value="" selected="selected">All</option>
+            </select>
+
+
+        </div>
+
+        <div class="col-md-3" data-field-span="1">
+            <label>Sub-Category</label>
+            <!--<input type="text" ng-model="selectedSkill" typeahead="mSkill as mSkill for mSkill in skillList | dropdownfilter:$viewValue:'mSkill'"
+                   ng-change="validateDropdowns()" class="form-control" />-->
+            <!--<select id='SubCategory' class="form-control" ng-model="TaxonomyCtrl.SelectedTaxonomy.SubCategoryID" ng-options="TaxonomyList.SubCategory as TaxonomyList.SubCategory for TaxonomyList in TaxonomyCtrl.TaxonomyList | uniqueFilter: 'SubCategory'" ng-change="TaxonomyCtrl.FilterTaxonomy()">
+                <option value="" selected="selected">All</option>
+
+            </select>-->
+            <select id='SubCategory' class="form-control" ng-model="TaxonomyCtrl.SelectedTaxonomy.SubCategoryID" ng-options="SubCategoryList.CategoryID as SubCategoryList.Name for SubCategoryList in TaxonomyCtrl.SubcategoryList | uniqueFilter: 'Name'" ng-change="TaxonomyCtrl.FilterTaxonomy()">
+                <option value="" selected="selected">All</option>
+
+            </select>
+        </div>
+        
+
+
+    </div>
+ 
+
+
+    <div class="col-md-12">
+        <br /><br />
+        <table class="display compact"  arb-data-table="TaxonomyCtrl.TaxonomyOptions"></table>
+
+    </div>

@@ -1,0 +1,195 @@
+﻿[
+  {
+    "ID": 1,
+    "ProjectId": "Project A",
+    "Phase": "J0",
+    "Title": "Project AAAAAAAAA",
+    "DateRequested": "6/30/2015",
+    "Stage": "Initial",
+    "Status" :  "New"
+  },{
+    "ID": 2,
+    "ProjectId": "Project B",
+    "Phase": "J0",
+    "Title": "Project BBBBBBBBB",
+    "DateRequested": "6/30/2015",
+    "Stage": "New",
+    "Status" :  "New"
+  },{
+    "ID": 3,
+    "ProjectId": "Project C",
+    "Phase": "J0",
+    "Title": "Project CCCCCCCC",
+    "DateRequested": "6/30/2015",
+    "Stage": "Submitted",
+    "Status" :  "New"
+  },{
+    "ID": 4,
+    "ProjectId": "Project D",
+    "Phase": "J0",
+    "Title": "Project DDDDDDDDD",
+    "DateRequested": "6/30/2015",
+    "Stage": "Accepted",
+    "Status" :  "Open"
+  },{
+    "ID": 5,
+    "ProjectId": "Project E",
+    "Phase": "J0",
+    "Title": "Project AAAAAAAAA",
+    "DateRequested": "6/30/2015",
+    "Stage": "Accepted Vote",
+    "Status" :  "Open"
+  },{
+    "ID": 6,
+    "ProjectId": "Project F",
+    "Phase": "J0",
+    "Title": "Project FFFFFFFFFFFFF",
+    "DateRequested": "6/30/2015",
+    "Stage": "Voting Initiated",
+    "Status" :  "Open"
+  },{
+    "ID": 7,
+    "ProjectId": "Project G",
+    "Phase": "J0",
+    "Title": "Project GGGGGGGGGGGGG",
+    "DateRequested": "6/30/2015",
+    "Stage": "Voting",
+    "Status" :  "Open"
+  },{
+    "ID": 8,
+    "ProjectId": "Project H",
+    "Phase": "J0",
+    "Title": "Project HHHHHHHHHHHH",
+    "DateRequested": "6/30/2015",
+    "Stage": "Voting Tied",
+    "Status" :  "Open"
+  },  {
+    "ID": 9,
+    "ProjectId": "Project I",
+    "Phase": "J0",
+    "Title": "Project AAAAAAAAA",
+    "DateRequested": "6/30/2015",
+    "Stage": "Voting Completed",
+    "Status" :  "Open"
+  },{
+    "ID": 10,
+    "ProjectId": "Project J",
+    "Phase": "J0",
+    "Title": "Project BBBBBBBBB",
+    "DateRequested": "6/30/2015",
+    "Stage": "Review Initiated",
+    "Status" :  "Open"
+  },{
+    "ID": 11,
+    "ProjectId": "Project K",
+    "Phase": "J0",
+    "Title": "Project CCCCCCCC",
+    "DateRequested": "6/30/2015",
+    "Stage": "Review ",
+    "Status" :  "Open"
+  },{
+    "ID": 12,
+    "ProjectId": "Project L",
+    "Phase": "J0",
+    "Title": "Project DDDDDDDDD",
+    "DateRequested": "6/30/2015",
+    "Stage": "Approved w/Conditions",
+    "Status" :  "Closed"
+  },{
+    "ID": 13,
+    "ProjectId": "Project M",
+    "Phase": "J0",
+    "Title": "Project AAAAAAAAA",
+    "DateRequested": "6/30/2015",
+    "Stage": "Approved",
+    "Status" :  "Closed"
+  },{
+    "ID": 14,
+    "ProjectId": "Project N",
+    "Phase": "J0",
+    "Title": "Project FFFFFFFFFFFFF",
+    "DateRequested": "6/30/2015",
+    "Stage": "Return",
+    "Status" :  "Closed"
+  },{
+    "ID": 15,
+    "ProjectId": "Project O",
+    "Phase": "J0",
+    "Title": "Project GGGGGGGGGGGGG",
+    "DateRequested": "6/30/2015",
+    "Stage": "Final",
+    "Status" :  "Closed"
+  },{
+    "ID": 16,
+    "ProjectId": "Project P",
+    "Phase": "J0",
+    "Title": "Project HHHHHHHHHHHH",
+    "DateRequested": "6/30/2015",
+    "Stage": "New Request",
+    "Status" :  "New Request"
+  },  {
+    "ID": 17,
+    "ProjectId": "Project Q",
+    "Phase": "J0",
+    "Title": "Project AAAAAAAAA",
+    "DateRequested": "6/30/2015",
+    "Stage": "New",
+    "Status" :  "New Request"
+  },{
+    "ID": 18,
+    "ProjectId": "Project R",
+    "Phase": "J0",
+    "Title": "Project BBBBBBBBB",
+    "DateRequested": "6/30/2015",
+    "Stage": "New",
+    "Status" :  "New Request"
+  },{
+    "ID": 19,
+    "ProjectId": "Project C",
+    "Phase": "J0",
+    "Title": "Project CCCCCCCC",
+    "DateRequested": "6/30/2015",
+    "Stage": "Approved with Exceptions",
+    "Status" :  "Closed"
+  },{
+    "ID": 20,
+    "ProjectId": "Project D",
+    "Phase": "J0",
+    "Title": "Project DDDDDDDDD",
+    "DateRequested": "6/30/2015",
+    "Stage": "Voting",
+    "Status" :  "Open"
+  },{
+    "ID": 21,
+    "ProjectId": "Project EEEEEEEE",
+    "Phase": "J0",
+    "Title": "Project AAAAAAAAA",
+    "DateRequested": "6/30/2015",
+    "Stage": "Voting",
+    "Status" :  "Open"
+  },{
+    "ID": 22,
+    "ProjectId": "Project FFFFFFFFF",
+    "Phase": "J0",
+    "Title": "Project FFFFFFFFFFFFF",
+    "DateRequested": "6/30/2015",
+    "Stage": "New",
+    "Status" :  "New Request"
+  },{
+    "ID": 23,
+    "ProjectId": "Project GGGGGGGGGGGGGG",
+    "Phase": "J0",
+    "Title": "Project GGGGGGGGGGGGG",
+    "DateRequested": "6/30/2015",
+    "Stage": "New",
+    "Status" :  "New Request"
+  },{
+    "ID": 24,
+    "ProjectId": "Project HHHHHHHHHHHHH",
+    "Phase": "J0",
+    "Title": "Project HHHHHHHHHHHH",
+    "DateRequested": "6/30/2015",
+    "Stage": "New",
+    "Status" :  "New Request"
+  }
+]

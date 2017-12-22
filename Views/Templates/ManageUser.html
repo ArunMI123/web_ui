@@ -1,0 +1,141 @@
+﻿<div>
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="manageUserCtrl.CloseModal()" aria-label="Close"><span aria-hidden="true" data-dismiss="modal">&times;</span></button>
+        <h3 class="modal-title">
+            Manage Users
+        </h3>
+
+    </div>
+    <div class="modal-body" id="modal-body">
+        
+            <div ng-if="manageUserCtrl.IsAlert" class="container" style="margin-left:-9em;width:auto">
+                <div class="col-md-3 col-md-offset-4 col-lg-5 col-lg-offset-4 col-sm-5 col-sm-offset-4 col-xs-12 " style="position: absolute;    top: 1%;    left: 0px;    margin: auto;    right: 0px;    width: 50%;    background-color: #393838;    opacity: 1;    float: left;">
+                    <div uib-alert style="color:white;margin: 0;" close="manageUserCtrl.CloseAlert()">
+                        <span>{{manageUserCtrl.AlertMessage}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading" style="height:55px">
+                    <span style="font-size: large;">Add User</span>
+                    <button class="btn btn-default btn-xs pull-right" ng-click="manageUserCtrl.SaveUser()" style="width: 6%;margin-top: -8px;">
+
+                        <img src="./Images/submit.png" class="btnSmall">
+                        <p class="btnSmallText" style="font-size: 0.9em;">Save</p>
+                    </button>
+                    <button class="btn btn-default btn-xs pull-right" ng-click="manageUserCtrl.Clear()" style="width: 6%;margin-top: -8px;">
+                        <img src="./Images/cancel.png" class="btnSmall">
+                        <p class="btnSmallText" style="font-size: 0.9em;">Clear</p>
+                    </button>
+                </div>
+
+                <div class="panel-body">
+                    <form name="manageUserCtrl.ManageForm">
+                        <div class="row" style="margin-left:2%">
+                            <div class="form-group">
+                                <div class="col-xs-4 ">
+
+                                    <label style="margin-top: -10cm;" for="name" ng-class="{'color-red' : manageUserCtrl.IsValid || ( manageUserCtrl.ManageForm.name.$touched && manageUserCtrl.ManageForm.name.$error.required)}">Name<span style="color:red;">*</span></label>
+                                    <input type="text" class="form-control" autocomplete="off" ng-class="{'border-red' : manageUserCtrl.IsValid || (manageUserCtrl.ManageForm.name.$touched && manageUserCtrl.ManageForm.name.$error.required)}" id="name" placeholder="Enter Name" ng-model="manageUserCtrl.User.ReviewerName" required
+                                           name="name">
+                                    <span style="color:red;font-size: 0.8em" ng-show="manageUserCtrl.IsValid || (manageUserCtrl.ManageForm.name.$touched && ( manageUserCtrl.ManageForm.name.$error.required))"> Please enter Name</span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label style="margin-top: -10cm;" ng-class="{'color-red' : manageUserCtrl.IsValid || ( manageUserCtrl.ManageForm.email.$touched && manageUserCtrl.ManageForm.email.$error.required)}" for="email">Email<span style="color:red;">*</span></label>
+                                    <input type="email" class="form-control"  autocomplete="off" ng-class="{'border-red' : manageUserCtrl.IsValid || ( manageUserCtrl.ManageForm.email.$touched && manageUserCtrl.ManageForm.email.$error.required)}" id="email" placeholder="Enter Email" name="email" ng-model="manageUserCtrl.User.ReviewerEmail" required>
+                                    <span style="color:red;font-size: 0.8em" ng-show="manageUserCtrl.IsValid || (manageUserCtrl.ManageForm.email.$touched && ( manageUserCtrl.ManageForm.email.$error.required))"> Please enter Email</span>
+                                    <span style="color:red;font-size: 0.8em" ng-show="manageUserCtrl.ManageForm.email.$touched && ( manageUserCtrl.ManageForm.email.$error.email)"> Please enter valid Email</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row" style="margin-left:2%">
+                            <div class="form-group">
+                                <div class="col-xs-5">
+                                    <label for="domain"> Domain: </label>
+                                    <div style="height:111px;overflow-y:auto;">
+                                        <div ng-repeat="domain in manageUserCtrl.Domains">
+                                            <label class="col-xs-8">
+                                                <span>{{domain.DomainName}}</span>
+                                                <span>({{domain.Type}})</span>
+                                            </label>
+                                            <input class="col-xs-4" type="checkbox" name="domaincheckbox" ng-model="checkDomain[domain.DomainID]" ng-click="manageUserCtrl.AddDomain(domain,checkDomain[domain.DomainID])" ng-checked="manageUserCtrl.AssignedDomain.indexOf(domain.DomainID) !== -1" required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4" ng-class="{'color-red' :  manageUserCtrl.IsValid || ( manageUserCtrl.ManageForm.Role.$touched && manageUserCtrl.ManageForm.Role.$error.required)}">
+                                    <label for="role" ng-class="{'color-red' : manageUserCtrl.IsValid || ( manageUserCtrl.ManageForm.Role.$touched && manageUserCtrl.ManageForm.Role.$error.required)}">Role<span style="color:red;">*</span></label>
+                                    <div class="radio">
+                                        <label><input type="radio" name="Role" ng-required="true" value="Reviewer" ng-model="manageUserCtrl.User.Role">Reviewer</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="Role"  ng-required="true" value="DM" ng-model="manageUserCtrl.User.Role">DM</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="Role"  ng-required="true" value="Both" ng-model="manageUserCtrl.User.Role">Both</label>
+                                    </div>
+                                    <div class="" >
+                                        <label style=" padding-right: 8px;">Active</label><input type="checkbox"  name="Activecheckbox" ng-model="manageUserCtrl.User.Active" ng-init="manageUserCtrl.User.Active=true">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </form>
+    </div>
+            </div>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading" style="height:55px">
+                    <span style="font-size: large;">Add Domains</span>
+                    <button class="btn btn-default btn-xs pull-right" ng-click="manageUserCtrl.SaveDomain(manageUserCtrl.NewDomain)" style="width: 6%;margin-top: -8px;">
+
+                        <img src="./Images/submit.png" class="btnSmall">
+                        <p class="btnSmallText" style="font-size: 0.9em;">Add</p>
+                    </button>
+                </div>
+
+                <div class="panel-body">
+                    <form name="manageUserCtrl.ManageDomain">
+                        <div class="row" style="margin-left:2%">
+                            <div class="form-group">
+                                <div class="col-xs-4">
+                                    <label ng-class="{'color-red' : manageUserCtrl.ManageDomain.DomainName.$touched && manageUserCtrl.ManageDomain.DomainName.$error.required}" for="DomainName">Domain Name<span style="color:red;">*</span></label>
+                                    <input type="text" ng-minlength="3"  autocomplete="off" ng-maxlength="50" class="form-control" ng-class="{'border-red' :manageUserCtrl.IsDomainValid || ( manageUserCtrl.ManageDomain.DomainName.$touched && manageUserCtrl.ManageDomain.DomainName.$error.required)}" id="DomainName" placeholder="Enter Domain Name" name="DomainName" ng-model="manageUserCtrl.NewDomain.DomainName" required>
+                                    <span style="color:red;font-size: 0.8em" ng-show="manageUserCtrl.IsDomainValid || (manageUserCtrl.ManageDomain.DomainName.$touched && (manageUserCtrl.ManageDomain.DomainName.$error.minlength || manageUserCtrl.ManageDomain.DomainName.$error.required))"> Please enter minimum 3 Characters</span>
+                                    <span style="color:red;font-size: 0.8em" ng-show="manageUserCtrl.ManageDomain.DomainName.$error.maxlength">Only 50 Charachters are allowed</span>
+                                 </div>
+                                
+                                <div class="col-xs-4" ng-class="{'color-red' :manageUserCtrl.IsDomainValid || ( manageUserCtrl.ManageDomain.DomainType.$touched && manageUserCtrl.ManageDomain.DomainType.$error.required)}">
+                                    <label ng-class="{'color-red' :manageUserCtrl.IsDomainValid || ( manageUserCtrl.ManageDomain.DomainType.$touched && manageUserCtrl.ManageDomain.DomainType.$error.required)}" >Domain Type<span style="color:red;">*</span></label>
+                                    <div class="radio">
+                                        <label><input type="radio" value="Standard" ng-model="manageUserCtrl.NewDomain.Type" ng-required="true" name="DomainType">Standard</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" value="Other" ng-model="manageUserCtrl.NewDomain.Type" ng-required="true" ng-selected="true" name="DomainType">Other</label>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                        </form>
+</div>
+            </div>
+
+            <div class="panel panel-default">
+
+
+                <div class="panel-body" style="overflow-x:auto;">
+                    <table arb-data-table="manageUserCtrl.requestTableOptions" ng-if="manageUserCtrl.requestTableOptions.data.length > 0"></table>
+
+                </div>
+            </div>
+           
+
+</div>
+        </div>

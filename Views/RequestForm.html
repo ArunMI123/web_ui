@@ -1,0 +1,707 @@
+﻿<div class="row" style="overflow: hidden">
+    <div class="col-md-3 divLeftCol">
+        <div class="row no-margin">
+            <h2 style="
+                margin-top: 0;
+                background: white;
+                color: green;
+                padding: 10px;
+                border: #A63232 2px solid;
+                ">
+                {{requestCtrl.Request.StageDesc}}
+            </h2>
+        </div>
+        <!--<div class="row no-margin">
+            {{requestCtrl.Request.VotingDecision }}
+            <h2>Review Type</h2>
+            <div style="margin-top:15px;">
+                <div class="resultsSectionDiv">
+                    {{requestCtrl.Request.VotingDecision}}
+                </div>
+            </div>
+        </div>-->
+        <div ng-if="requestCtrl.PanelAuthorizeFlags.assignVote" class="row no-margin">
+            <h2>Review DueDate</h2>
+            <div class="row">
+                <div class="col-md-12" style="margin-top:20px;">
+                    <form role="form">
+                        <div class="input-group" style="padding: 0px 20%;">
+                            <input type="text" class="form-control" style="width: 100%; height: 22px;" is-open="requestCtrl.DueDateFlag" name="DueDate" ng-model="requestCtrl.ReviewForm.DueDate" uib-datepicker-popup="MM/dd/yyyy" />
+                            <span class="input-group-btn">
+                                <button type="button" ng-click="requestCtrl.DueDateFlag = !requestCtrl.DueDateFlag" class="btn btn-default btn-xs">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <h2>Assign the Review</h2>
+            <div id="divReviewers" style="margin-top:12px; padding-left: 5px;">
+                <div class="form-group" ng-repeat="domain in requestCtrl.DropdownLists['domain']">
+                    <label ng-if="domain.Type!='Other'">{{domain.DomainName}} Architecture</label>
+
+                    <select ng-if="domain.Type!='Other'" id='selEA' class="form-control" ng-model="requestCtrl.ReviewForm.ReviewersList[domain.DomainID].ReviewerID" ng-change="requestCtrl.ReviewForm.ReviewersList[domain.DomainID].DomainID = domain.DomainID; requestCtrl.ReviewForm.ReviewersList[domain.DomainID].RequestID = requestCtrl.Request.RequestID" ng-options="reviewer.Reviewer.ReviewerID as reviewer.Reviewer.ReviewerName for reviewer in requestCtrl.DropdownLists['reviewer'] | filter: {DomainID:domain.DomainID}:true" convert-to-number>
+                        <option value="" selected="selected">Select One</option>
+
+                    </select>
+
+
+                </div>
+                <label style=" color: white;    font-size: 1.1em;">Other Architectures</label>
+                <div style="margin-left: 6%;width: 100%;">
+
+                    <ui-select multiple ng-model="requestCtrl.ReviewForm.ReviewersListOther" theme="bootstrap" sortable="true" close-on-select="false">
+                        <ui-select-match placeholder="Select Reviewers">{{$item.Reviewer.ReviewerName}} </ui-select-match>
+                        <ui-select-choices repeat="person in requestCtrl.DropdownLists['reviewer'] | filter: {Domain:{Type:'Other'}}">
+
+                            <div ng-bind-html="person.Reviewer.ReviewerName | highlight: $select.search"></div>
+                            <small>
+                                Domain:{{person.Domain.DomainName}}
+                            </small>
+                        </ui-select-choices>
+                    </ui-select>
+
+                </div>
+                <br />
+                <div class="leftToolButtons leftPanelButtons" ng-if="requestCtrl.PanelAuthorizeFlags.isAssignReview">
+                    <button class="btn btn-default" ng-click='requestCtrl.SubmitToReview()'>
+                        <img src="./Images/submit.png" class="btnSmall">
+                        <p class="btnSmallText">Assign Review</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row no-margin" ng-if="requestCtrl.PanelAuthorizeFlags.instructions">
+            <h2>Instructions</h2>
+            <div class="instructions" style="margin-top:12px;">
+                <p>Use the form to the right to complete your ARB Request.</p>
+                <p>Steps</p>
+                <ul>
+                    <li>Enter the data on the form.</li>
+                    <li>Save the form.</li>
+                    <li>Attach all required files.</li>
+                    <li>Submit the request to the ARB.</li>
+                </ul>
+                <p>
+                    You can begin the review and save it to work on later prior to submission.
+                </p>
+            </div>
+            <!--<div class="row">
+                <div class="col-md-12">
+                    <dropdown-multiselect model="requestCtrl.SelectedUserIds"
+                                          options="requestCtrl.Users"></dropdown-multiselect>
+                </div>
+                <div class="col-md-12">
+                    <ul>
+                        <li data-ng-repeat="item in requestCtrl.SelectedUserIds">
+                            {{ item }}
+                        </li>
+                    </ul>
+                </div>
+            </div>-->
+            <!--<h3>Array of objects (sorting enabled)</h3>
+            <div class="col-md-12">
+                <ui-select multiple ng-model="requestCtrl.multipleDemo.selectedPeople" theme="bootstrap" sortable="true" close-on-select="false" >
+                    <ui-select-match placeholder="Select person...">{{$item.name}} </ui-select-match>
+                    <ui-select-choices repeat="person in requestCtrl.People | filter: {name: $select.search}">
+                        <div ng-bind-html="person.name | highlight: $select.search"></div>
+                        <small>
+
+                            age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+                        </small>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <p>Selected: {{requestCtrl.multipleDemo.selectedPeople}}</p>-->
+        </div>
+
+        <div class="row no-margin" ng-if="requestCtrl.PanelAuthorizeFlags.acceptPackage">
+            <h2>ARB Package</h2>
+            <div class="form-group text-center" style="margin-top: 15px;">
+
+
+                <select class="form-control" style="margin-left: 5%;" ng-model="requestCtrl.ReviewForm.SubmissionDecision" ng-options="reviewType.ReviewTypeId as reviewType.Description for reviewType in requestCtrl.DropdownLists['ReviewType']">
+                    <option value="" selected="selected" disabled>Select One</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label class='commentsLbl'>Comments</label>
+                <textarea class="form-control commentsTextArea" ng-model="requestCtrl.ReviewForm.SubmissionDecisionComment"></textarea>
+            </div>
+            <div class="leftToolButtons leftPanelButtons">
+                <button class="btn btn-default" ng-click='requestCtrl.SubmitSubmissionDecision()'>
+                    <img src="./Images/submit.png" class="btnSmall">
+                    <p class="btnSmallText">Submit Decision</p>
+                </button>
+            </div>
+        </div>
+        <!--<div ng-if="requestCtrl.PanelAuthorizeFlags.votingResults && requestCtrl.ReviewForm.VotingResult.length>0" class="row no-margin">
+            <h2>Voting Results</h2>
+            <div style="margin-top:15px;">
+                <div class="resultsSectionDiv" ng-repeat="vote in requestCtrl.ReviewForm.VotingResult">
+
+                    <p class="row resultDispHdr" style="margin-bottom: 0px;font-weight:bolder">
+                        <span>{{vote.Domain.DomainName}}</span>
+                    </p>
+
+                    <p class="row resultDispHdr" style="margin-bottom: 0px;">
+                        <span class="col-md-8 color-yellow" style="padding-left: 0px;">{{vote.Reviewer.ReviewerName}}</span>
+                        <span id='spEAVoteResult' class="resultDisp" style="margin-right:5%">{{vote.Result}}</span>
+                    </p>
+
+                </div>
+                <p class="resultDispHdr" ng-if="requestCtrl.Request.VotingDecision!=null" style="margin-bottom: 0px; font-weight: bolder; border-top-style: solid; border-top-color: #a63232; margin-top: 5px; border-top-width: 2px;padding-top: 4px;">
+                    Voting Decision
+                    <span id='spEAVoteResult' class="resultDisp">{{requestCtrl.Request.VotingDecision}}</span>
+                </p>
+            </div>
+        </div>-->
+
+        <div ng-if="requestCtrl.PanelAuthorizeFlags.packageActionPanel" class="row no-margin">
+            <h2>Package Submission</h2>
+            <div class="form-group " style="margin-top: 15px;">
+
+
+
+                <div class="leftToolButtons leftPanelButtons">
+                    <div class="row">
+                        <span class="col-md-4">
+                            <button  tooltip-placement="right" uib-tooltip="Save and Submit full ARB Package to the ARB"  class="btn btn-default " ng-click='requestCtrl.SubmitPackage()'>
+                                <img src="./Images/submit.png" class="btnSmall">
+                                <p class="btnSmallText">Submit Package</p>
+                            </button>
+                        </span>
+
+                    </div>
+                    <p class="buttonInstruction">You may add your package at anytime until click above button</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row no-margin" ng-if="requestCtrl.PanelAuthorizeFlags.packageAcceptancePanel">
+            <h2>Package Decision</h2>
+            <div class="form-group" style="margin-top: 25px;">
+                <select class="form-control no-margin" style="margin-left: 5%;" ng-model="requestCtrl.ReviewForm.PackageDecision">
+                    <option value="" selected="selected" disabled>Select One</option>
+                    <option value="1">Accept</option>
+                    <option value="2">Reject</option>
+                </select>
+                <div class="form-group">
+                    <label class='commentsLbl'>Comments</label>
+                    <textarea class="form-control commentsTextArea" ng-model="requestCtrl.ReviewForm.PackageDecisionComment"></textarea>
+                </div>
+            </div>
+
+            <div class="leftToolButtons leftPanelButtons">
+                <button class="btn btn-default" ng-click='requestCtrl.SubmitPackageDecision()'>
+                    <img src="./Images/submit.png" class="btnSmall">
+                    <p class="btnSmallText">Submit Decision</p>
+                </button>
+            </div>
+        </div>
+      
+                <div ng-if="requestCtrl.PanelAuthorizeFlags.approvalResults " class="row no-margin">
+                    <h2>Review Results</h2>
+                    <div style="margin-top:15px;">
+                        <div ng-if="requestCtrl.ReviewForm.ReviewResult.length>0" class="resultsSectionDiv" ng-repeat="review in requestCtrl.ReviewForm.ReviewResult" ng-init="requestCtrl.ReviewForm.ReviewersList[review.Domain.DomainID].ReviewerID==review.Reviewer.ReviewerID">
+                            <div class="row">
+                                <p class="resultDispHdr col-lg-10" style="margin-bottom: 0px;font-weight:bolder;">{{review.Domain.DomainName}}</p>
+                            </div>
+                            <div class="row">
+                                <p class="resultDispHdr" style="margin-bottom: 0px;">
+                                    <span class="col-md-8" style="padding-left: 0px;" ng-if="review.Result=='No Result' && requestCtrl.PanelAuthorizeFlags.reAssignPanel &&  review.Domain.Type!='Other'">
+                                        <select id='selEA' class="form-control"
+                                                ng-model="review.Reviewer.ReviewerID"
+                                                ng-options="reviewer.Reviewer.ReviewerID as reviewer.Reviewer.ReviewerName for reviewer in requestCtrl.DropdownLists['reviewer'] | filter: {DomainID:review.Domain.DomainID}"></select>
+                                    </span>
+
+                                    <span class="col-md-6 color-yellow" ng-if="review.Result!='No Result' || !requestCtrl.PanelAuthorizeFlags.reAssignPanel || review.Domain.Type=='Other'">{{review.Reviewer.ReviewerName}}</span>
+
+                                    <span class="resultDisp" style="margin-right: 5%;" id='spEAVoteResult'>{{review.Result}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <p class="resultDispHdr" ng-if="requestCtrl.Request.DMReviewDecision!=null" style="margin-bottom: 6px; font-weight: bolder; border-top-style: solid; border-top-color: #a63232; margin-top: 5px; border-width: 2px;padding: 4px;">Review Decision<span id='spEAVoteResult' class="resultDisp">{{requestCtrl.Request.DMReviewDecision}}</span></p>
+                    </div>
+                    <div class="leftToolButtons leftPanelButtons" ng-if="requestCtrl.PanelAuthorizeFlags.reAssignPanel" style="margin-top:2%">
+                        <button class="btn btn-default" ng-click='requestCtrl.ReAssignDecision()'>
+                            <img src="./Images/submit.png" class="btnSmall">
+                            <p class="btnSmallText">Reassign</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!--<div ng-if="requestCtrl.PanelAuthorizeFlags.voterPanel" class="row no-margin" ng-init="LoadReviewerPanel">
+                <h2>Voting</h2>
+                <div class="form-group " style="margin-top: 15px;">
+                    <div id="prevVoteId" style="display: none;"></div>
+                    <div id="prevVoteMsg" style="display: none;"></div>
+                    <div class="form-group">
+                        <select id='VotingDecision' class="form-control" ng-model="requestCtrl.ReviewForm.CurrentReviewer.Result">
+                            <option value='No Result'>Select One</option>
+                            <option value='No Review' ng-select>No Review</option>
+                            <option value='Lite'>ARB Lite</option>
+                            <option value='Offline'>ARB Offline</option>
+                            <option value='Online'>ARB Online</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label class='commentsLbl'>Comments</label>
+                        <textarea id='voteComments' class="commentsTextArea form-control" ng-model="requestCtrl.ReviewForm.CurrentReviewer.Comments"></textarea>
+                    </div>
+
+                    <div class="leftToolButtons leftPanelButtons">
+                        <div class="row">
+                            <span class="col-md-4">
+                                <button class="btn btn-default " ng-click='requestCtrl.SubmitVote()'>
+                                    <img src="./Images/submit.png" class="btnSmall">
+                                    <p class="btnSmallText">Submit Vote</p>
+                                </button>
+                            </span>
+                            <span ng-if="requestCtrl.ReviewForm.VotingResult[requestCtrl.ReviewForm.CurrentProfile].LastModified !=null" class="col-md-6 leftColText leftColDate">
+                                <span>Last Voted</span><br />
+                                <span ng-bind="requestCtrl.ReviewForm.VotingResult[requestCtrl.ReviewForm.CurrentProfile].LastModified | date:'MM/dd/yyyy'"></span>
+                            </span>
+                        </div>
+                        <p class="buttonInstruction">You may edit your vote at anytime until the request moves to the Reviewing Stage</p>
+
+                    </div>
+
+
+                </div>
+            </div>-->
+                <div ng-if="requestCtrl.PanelAuthorizeFlags.reviewerPanel" class="row no-margin">
+                    <h2>{{requestCtrl.ReviewForm.HeaderTextforDM}}</h2>
+                    <div class="form-group" style="margin-top:20px;">
+                        <select id='ReviewerDecision' class="form-control" ng-model=" requestCtrl.ReviewForm.CurrentReviewer.Result">
+                            <option value='No Result' selected>Select One</option>
+                            <option value='Approved'>Approved</option>
+                            <option value='Approved w/Conditions'>Approved w/Conditions</option>
+                            <option value='Approved w/Exceptions'>Approved w/Exceptions</option>
+                            <option value='Return'>Return</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class='commentsLbl '>Comments</label>
+                        <textarea id='reviewComments' class="commentsTextArea form-control" ng-model=" requestCtrl.ReviewForm.CurrentReviewer.Comments"></textarea>
+                    </div>
+
+                    <div id='divSubMenu' style='margin-top: 9px;'>
+                        <div class="leftToolButtons leftPanelButtons">
+                            <div class="row">
+                                <span class="col-md-4">
+                                    <button class="btn btn-default" ng-click='requestCtrl.SubmitReview()'>
+                                        <img src="./Images/submit.png" class="btnSmall">
+                                        <p class="btnSmallText">Submit Review</p>
+                                    </button>
+                                </span>
+                                <span style="font-size: 16px;" ng-if="requestCtrl.ReviewForm.ReviewResult[requestCtrl.ReviewForm.CurrentProfile].LastModified !=null" class="col-md-6 leftColText leftColDate">
+                                    <span>Last Reviewed</span><br />
+                                    <span ng-bind="requestCtrl.ReviewForm.ReviewResult[requestCtrl.ReviewForm.CurrentProfile].LastModified | date:'MM/dd/yyyy'"></span>
+                                </span>
+
+                            </div>
+                            <p ng-if="requestCtrl.Request.Stage==7" class="buttonInstruction">You may edit your review disposition vote at anytime until the request moves to the Complete Stage</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div ng-if="requestCtrl.PanelAuthorizeFlags.actionItems" class="row no-margin">
+                    <h2>Conditions</h2>
+                    <div id='divSubMenuCondition' style='margin-top: 9px;'>
+                        <div class="leftToolButtons leftPanelButtons manageButton">
+                            <button class="btn btn-default" ng-click="requestCtrl.ManageCondition()">
+                                <img src="./Images/submit.png" class="btnSmall">
+                                <p class="btnSmallText">{{requestCtrl.ReviewForm.ConditionButtonText}}</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id='divActiomItemTable' style='margin-top: 15px;clear: both;'>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class='actionItemCol1Hdr text-center'>Count</th>
+
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td class="resultDispHdr" style="padding:5px;font-weight:bolder;text-align: center;">Total Condition</td>
+                                <td style="color:yellow;font-weight:bolder">{{requestCtrl.Request.ConditionCount.TotalCondition}}</td>
+
+                            </tr>
+                            <tr>
+                                <td class="resultDispHdr" style="padding:5px;font-weight:bolder;text-align: center;">Resolved Condition</td>
+                                <td style="color:yellow;font-weight:bolder">{{requestCtrl.Request.ConditionCount.ResolvedCondition}}</td>
+
+                            </tr>
+                            <tr>
+                                <td class="resultDispHdr" style="padding:5px;font-weight:bolder;text-align: center;">Closed Condition</td>
+                                <td style="color:yellow;font-weight:bolder">{{requestCtrl.Request.ConditionCount.ClosedCondition}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+                <div class="col-md-9" style="background-color:white">
+                    <div class="grid-form">
+                        <form name="requestCtrl.requestForm">
+                            <fieldset ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel">
+                                <legend>Project and Contact Information <!--<span class="label label-success pull-right" style="margin: 3px 0px;">Initial</span>--></legend>
+
+                                <div data-row-span="5">
+                                    <div id='messageArea' data-field-span="1">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.SubmittedBy.$touched && (requestCtrl.requestForm.SubmittedBy.$error.required || requestCtrl.requestForm.SubmittedBy.$error.email)}">Submitted By</label>
+
+                                        <div class="input-group">
+
+                                            <input name='SubmittedBy' type="email" ng-model="requestCtrl.Request.EnteredBy" ng-class="{'border-red' : requestCtrl.requestForm.SubmittedBy.$touched && (requestCtrl.requestForm.SubmittedBy.$error.required || requestCtrl.requestForm.SubmittedBy.$error.email)}" ng-disabled="true" ng-required="requestCtrl.GetProfile().Role.toLowerCase() == 'dm'&& requestCtrl.Request.RequestID !=0" />
+                                            <span class="input-group-btn" ng-if="requestCtrl.GetProfile().Role.toLowerCase() == 'dm' ">
+                                                <button type="button" ng-class="{'border-red' : requestCtrl.requestForm.SubmittedBy.$touched && (requestCtrl.requestForm.SubmittedBy.$error.required || requestCtrl.requestForm.SubmittedBy.$error.email)}" uib-popover-template="requestCtrl.ReviewForm.Popupurl" popover-trigger="'outsideClick'" popover-placement="auto top" popover-append-to-body="true" class="btn btn-default btn-xs" ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </button>
+                                            </span>
+
+                                        </div>
+                                    </div>
+
+                                    <div data-field-span="1">
+                                        <label>Region</label>
+                                        <select id="selRegion" class="form-control" name="requestCtrl.requestForm.region" ng-model="requestCtrl.Request.Region" disabled="disabled">
+                                            {{requestCtrl.Request.Region}}
+                                            <option value="SelectOne" disabled="disabled">Select One</option>
+                                            <option ng-repeat="region in requestCtrl.DropdownLists['region']" value="{{region.RegionID}}">{{region.RegionName}}</option>
+                                        </select>
+                                    </div>
+                                    <div data-field-span="1">
+                                        <label ng-class="{'color-red': requestCtrl.requestForm.DateRequested.$touched && requestCtrl.requestForm.DateRequested.$error.required}">Requested Date<span style="color:red;">*</span></label>
+                                        <div class="input-group">
+                                            <input type="text" is-open="requestCtrl.requestedDateFlag" name="DateRequested" ng-model="requestCtrl.Request.DateRequested" uib-datepicker-popup="{{'MM/dd/yyyy'}}"  required ng-class="{'border-red': requestCtrl.requestForm.DateRequested.$touched && requestCtrl.requestForm.DateRequested.$error.required}" date-validation ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                            <span class="input-group-btn">
+                                                <button type="button" ng-click="requestCtrl.requestedDateFlag = !requestCtrl.requestedDateFlag" class="btn btn-default btn-xs">
+                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div data-field-span="1">
+
+                                        <label ng-class="{'color-red': requestCtrl.requestForm.JEventDate.$touched && requestCtrl.requestForm.JEventDate.$error.required}">J-Event Target Date<span style="color:red;">*</span></label>
+                                        <div class="input-group">
+                                            <input type="text" tooltip-placement="top" uib-tooltip="The date of the corresponding PMO Event."  is-open="requestCtrl.JEventDateFlag" ng-change="requestCtrl.JEventChange()"name="JEventDate" ng-model="requestCtrl.Request.JEventDate" uib-datepicker-popup="MM/dd/yyyy" alt-input-formats="['M!/d!/yy']" required ng-class="{'border-red': requestCtrl.requestForm.JEventDate.$touched && requestCtrl.requestForm.JEventDate.$error.required}" date-validation ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                            <span class="input-group-btn">
+                                                <button type="button" ng-click="requestCtrl.JEventDateFlag = !requestCtrl.JEventDateFlag" class="btn btn-default btn-xs">
+                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div data-field-span="1">
+                                        <label>Submission Date</label>
+                                        <label id="lblSubmissionDate" style="color:red;margin-bottom:0px;">{{requestCtrl.Request.SubmissionDate | date:'MM/dd/yyyy'}}</label>
+                                    </div>
+                                </div>
+                                <div data-row-span="5">
+                                    <div data-field-span="1">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.ProjectID.$touched && requestCtrl.requestForm.ProjectID.$error.required}">Project ID<span style="color:red;">*</span></label>
+                                        <input type="text" name="ProjectID" ng-model="requestCtrl.Request.ProjectID" all-caps-input required ng-class="{'border-red' : requestCtrl.requestForm.ProjectID.$touched && requestCtrl.requestForm.ProjectID.$error.required}" ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel||requestCtrl.Request.RequestID!=0" />
+                                    </div>
+                                    <div data-field-span="2">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.ProjectName.$touched && requestCtrl.requestForm.ProjectName.$error.required}">Project Name<span style="color:red;">*</span></label>
+                                        <input name='ProjectName' type="text" autofocus ng-model="requestCtrl.Request.ProjectName" ng-class="{'border-red' : requestCtrl.requestForm.ProjectName.$touched && requestCtrl.requestForm.ProjectName.$error.required}" required ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                    </div>
+                                    <div data-field-span="1">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.Phase.$touched && requestCtrl.requestForm.Phase.$error.required}">Phase<span style="color:red;">*</span></label>
+                                        <select name='Phase' class="form-control" ng-model="requestCtrl.Request.Phase" required ng-class="{'border-red' : requestCtrl.requestForm.Phase.$touched && requestCtrl.requestForm.Phase.$error.required}">
+                                            <option value='' disabled="disabled">Select One</option>
+                                            <option value='J0'>J0</option>
+                                            <option value='J1'>J1</option>
+                                        </select>
+                                    </div>
+                                    <div data-field-span="1">
+                                        <label>Project Type</label>
+                                        <select class="form-control" ng-model="requestCtrl.Request.ProjectType" convert-to-number>
+                                            <option value='' disabled="disabled">Select One</option>
+                                            <option ng-repeat="projectType in requestCtrl.DropdownLists['projectType']" value="{{projectType.Key}}">{{projectType.Value}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div data-row-span="4">
+                                    <div data-field-span="1">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.ProjectManager.$touched && (requestCtrl.requestForm.ProjectManager.$error.required || requestCtrl.requestForm.ProjectManager.$error.email)}">Project Manager (email)</label>
+                                        <input name='ProjectManager' type="email" autofocus ng-model="requestCtrl.Request.ProjectManager" ng-class="{'border-red' : requestCtrl.requestForm.ProjectManager.$touched && (requestCtrl.requestForm.ProjectManager.$error.required || requestCtrl.requestForm.ProjectManager.$error.email)}" ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                    </div>
+                                    <div data-field-span="1">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.InfrastructurePM.$touched && (requestCtrl.requestForm.InfrastructurePM.$error.required || requestCtrl.requestForm.InfrastructurePM.$error.email)}">Infrastructure PM (email)</label>
+                                        <input name='InfrastructurePM' type="email" ng-model="requestCtrl.Request.InfrastructurePM" autofocus ng-class="{'border-red' : requestCtrl.requestForm.InfrastructurePM.$touched && (requestCtrl.requestForm.InfrastructurePM.$error.required || requestCtrl.requestForm.InfrastructurePM.$error.email)}" ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                    </div>
+                                    <div data-field-span="1">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.SolutionArchitect.$touched && (requestCtrl.requestForm.SolutionArchitect.$error.required || requestCtrl.requestForm.SolutionArchitect.$error.email)}">Solution Architect (email)<span style="color:red;">*</span></label>
+                                        <input name='SolutionArchitect' type="email" ng-model="requestCtrl.Request.SolutionArchitect" autofocus ng-class="{'border-red' : requestCtrl.requestForm.SolutionArchitect.$touched && (requestCtrl.requestForm.SolutionArchitect.$error.required || requestCtrl.requestForm.SolutionArchitect.$error.email)}" required ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                    </div>
+                                    <div data-field-span="1">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.SecurityArchitect.$touched && (requestCtrl.requestForm.SecurityArchitect.$error.required || requestCtrl.requestForm.SecurityArchitect.$error.email)}">Security Architect (email)</label>
+                                        <input name='SecurityArchitect' type="email" ng-model="requestCtrl.Request.SecurityArchitect" autofocus ng-class="{'border-red' : requestCtrl.requestForm.SecurityArchitect.$touched && (requestCtrl.requestForm.SecurityArchitect.$error.required || requestCtrl.requestForm.SecurityArchitect.$error.email)}" ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                    </div>
+                                </div>
+                                <div data-row-span="1" ng-if="requestCtrl.Request.RequestID !=0">
+                                    <div data-field-span="1">
+                                        <label  tooltip-placement="top" uib-tooltip="Sharepoint repository for ARB attachments" >
+                                            Sharepoint Location (Click to view in Sharepoint Site)
+                                            &nbsp;
+                                            <a href=" {{requestCtrl.ReviewForm.SharepointLoc[0]}}" target="_blank">J0 Phase </a>|
+                                            <a href=" {{requestCtrl.ReviewForm.SharepointLoc[1]}}" target="_blank">J1 Phase </a>
+                                        </label>
+                                    </div>
+
+
+                                </div>
+                            </fieldset>
+
+                            <fieldset ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel">
+                                <legend>Describe the Project</legend>
+                                <div data-row-span="1">
+                                    <div data-field-span="1">
+                                        <label>Please describe the project in <span style="color:red;">BUSINESS terms.*</span></label>
+                                        <textarea id='txtBusPurpose' ng-minlength="10" rows="8" name="BusinessScope" autofocus ng-model="requestCtrl.Request.BusinessScope" ng-class="requestCtrl.requestForm.BusinessScope.$touched && requestCtrl.requestForm.BusinessScope.$error.required" required ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel"></textarea>
+                                    </div>
+
+                                </div>
+                                <span style="color:red;font-size: 0.8em" ng-show="requestCtrl.requestForm.BusinessScope.$touched && (requestCtrl.requestForm.BusinessScope.$error.minlength || requestCtrl.requestForm.BusinessScope.$error.required)"> Please enter minimum 10 Characters for Business Terms</span>
+                            </fieldset>
+                            <fieldset ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel">
+                                <legend>Describe the Scope of Change</legend>
+                                <div data-row-span="1">
+                                    <div data-field-span="1">
+                                        <label>Please describe the scope of change in <span style="color:red;"> TECHNICAL terms.*</span></label>
+                                        <textarea id='txtTechScope' ng-minlength="10" rows="8" name="TechScope" ng-model="requestCtrl.Request.TechScope" ng-class="requestCtrl.requestForm.TechScope.$touched && requestCtrl.requestForm.TechScope.$error.required" required ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel"></textarea>
+                                    </div>
+
+                                </div>
+                                <span style="color:red;font-size: 0.8em" ng-show="requestCtrl.requestForm.TechScope.$touched && (requestCtrl.requestForm.TechScope.$error.minlength || requestCtrl.requestForm.TechScope.$error.required)"> Please enter minimum 10 Characters for Technical Terms</span>
+                            </fieldset>
+                            <fieldset ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel">
+                                <legend>Project Sizing Estimates</legend>
+                                <div data-row-span="2">
+                                    <div data-field-span="1" ng-class="{'color-red' : requestCtrl.requestForm.estTotalProjectHrs.$touched && requestCtrl.requestForm.estTotalProjectHrs.$error.required}">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.estTotalProjectHrs.$touched && requestCtrl.requestForm.estTotalProjectHrs.$error.required}">Estimated Total Project Hours<span style="color:red;">*</span></label>
+
+                                        <label><input id='estTotalProjHrs1' name='estTotalProjectHrs' type="radio" value="1" ng-required="true" ng-model="requestCtrl.Request.EstTotalHours" /> &lt;250</label> &nbsp;
+                                        <label><input id='estTotalProjHrs2' name='estTotalProjectHrs' type="radio" value="2" ng-required="true" ng-model="requestCtrl.Request.EstTotalHours" /> 250 - 1000</label> &nbsp;
+                                        <label><input id='estTotalProjHrs3' name='estTotalProjectHrs' type="radio" value="3" ng-required="true" ng-model="requestCtrl.Request.EstTotalHours" /> &gt;1000</label>
+                                    </div>
+                                    <div data-field-span="1" ng-class="{'color-red' : requestCtrl.requestForm.estTotalProjectCost.$touched && requestCtrl.requestForm.estTotalProjectCost.$error.required}">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.estTotalProjectCost.$touched && requestCtrl.requestForm.estTotalProjectCost.$error.required}">Estimated Total Project Cost<span style="color:red;">*</span></label>
+                                        <label><input id='estTotalProjCost1' name='estTotalProjectCost' type="radio" value="1" ng-required="true" ng-model="requestCtrl.Request.EstTotalCost" /> &lt;250K</label> &nbsp;
+                                        <label><input id='estTotalProjCost2' name='estTotalProjectCost' type="radio" value="2" ng-required="true" ng-model="requestCtrl.Request.EstTotalCost" /> 250K - 1M</label> &nbsp;
+                                        <label><input id='estTotalProjCost3' name='estTotalProjectCost' type="radio" value="3" ng-required="true" ng-model="requestCtrl.Request.EstTotalCost" /> &gt;1M</label>
+                                    </div>
+                                </div>
+                                <div data-row-span="2">
+                                    <div data-field-span="1" ng-class="{'color-red' : requestCtrl.requestForm.estJ0Hrs.$touched && requestCtrl.requestForm.estJ0Hrs.$error.required}">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.estJ0Hrs.$touched && requestCtrl.requestForm.estJ0Hrs.$error.required}">Estimated J0 Hours<span style="color:red;">*</span></label>
+                                        <label><input id='estJ0Hrs1' name='estJ0Hrs' type="radio" value="1" ng-required="true" ng-model="requestCtrl.Request.EstProjectHoursJ0" /> &lt;50</label> &nbsp;
+                                        <label><input id='estJ0Hrs2' name='estJ0Hrs' type="radio" value='2' ng-required="true" ng-model="requestCtrl.Request.EstProjectHoursJ0" /> 50 - 100</label> &nbsp;
+                                        <label><input id='estJ0Hrs3' name='estJ0Hrs' type="radio" value="3" ng-required="true" ng-model="requestCtrl.Request.EstProjectHoursJ0" /> &gt;100</label>
+                                    </div>
+                                    <div data-field-span="1" ng-class="{'color-red' : requestCtrl.requestForm.estJ0Cost.$touched && requestCtrl.requestForm.estJ0Cost.$error.required}">
+                                        <label ng-class="{'color-red' : requestCtrl.requestForm.estJ0Cost.$touched && requestCtrl.requestForm.estJ0Cost.$error.required}">Estimated Hardware/Software Cost <span style="color:red;">*</span></label>
+                                        <label><input id='estJ0Cost1' name='estJ0Cost' type="radio" value="1" ng-required="true" ng-model="requestCtrl.Request.EstProjectCostJ0" /> &lt;10K</label> &nbsp;
+                                        <label><input id='estJ0Cost2' name='estJ0Cost' type="radio" value="2" ng-required="true" ng-model="requestCtrl.Request.EstProjectCostJ0" /> 10 - 100K</label> &nbsp;
+                                        <label><input id='estJ0Cost3' name='estJ0Cost' type="radio" value="3" ng-required="true" ng-model="requestCtrl.Request.EstProjectCostJ0" /> &gt;100K</label>
+                                    </div>
+                                </div>
+                                <div data-row-span="2">
+                                    <div data-field-span="1">
+                                        <div style="width:50%;float:left;">
+                                            <label ng-class="{'color-red' : requestCtrl.requestForm.NetNew.$touched &&   (requestCtrl.requestForm.NetNew.$error.required || requestCtrl.requestForm.NetNew.$error.min || requestCtrl.requestForm.NetNew.$error.max)}">% Net New<span style="color:red;">*</span></label>
+                                            <input  tooltip-placement="top" uib-tooltip="Estimated percentage of the system which is new as a part of this project." name='NetNew' type="number" min="0" max="100" ng-change="requestCtrl.NetNewChange()" ng-model="requestCtrl.Request.NetNew" autofocus ng-class="{'border-red' : requestCtrl.requestForm.NetNew.$touched &&  (requestCtrl.requestForm.NetNew.$error.required || requestCtrl.requestForm.NetNew.$error.min ||  requestCtrl.requestForm.NetNew.$error.max)}" required ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                        </div>
+                                        <div style="width:50%;float:right;" ng-show="requestCtrl.Request.NetNew > 0">
+                                            <label ng-class="{'color-red' : requestCtrl.requestForm.NetNewComments.$touched && requestCtrl.requestForm.NetNewComments.$error.required }">Comments<span style="color:red;">*</span></label>
+                                            <input name='NetNewComments' type="text" ng-if="requestCtrl.Request.NetNew > 0" ng-model="requestCtrl.Request.NetNewComments" autofocus ng-class="{'border-red' : requestCtrl.requestForm.NetNewComments.$touched &&  requestCtrl.requestForm.NetNewComments.$error.required }" required ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                        </div>
+                                    </div>
+                                    <div data-field-span="1">
+                                        <div style="width:50%;float:left;">
+                                            <label ng-class="{'color-red' : requestCtrl.requestForm.StandardBased.$touched &&   ( requestCtrl.requestForm.StandardBased.$error.required || requestCtrl.requestForm.StandardBased.$error.min || requestCtrl.requestForm.StandardBased.$error.max)}">% Standard Based<span style="color:red;">*</span></label>
+                                            <input tooltip-placement="top" uib-tooltip="Estimated percentage of the system which leverages HNA standards" name='StandardBased' type="number" min="0" max="100" ng-change="requestCtrl.StandardBasedChange()" ng-model="requestCtrl.Request.StandardBased" autofocus ng-class="{'border-red' : requestCtrl.requestForm.StandardBased.$touched &&   ( requestCtrl.requestForm.StandardBased.$error.required || requestCtrl.requestForm.StandardBased.$error.min || requestCtrl.requestForm.StandardBased.$error.max)}" required ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                        </div>
+                                        <div style="width:50%;float:right;" ng-show="requestCtrl.Request.StandardBased < 100  && requestCtrl.Request.StandardBased != null">
+                                            <label ng-class="{'color-red' : requestCtrl.requestForm.StandardBasedComments.$touched && requestCtrl.requestForm.StandardBasedComments.$error.required }">Comments<span style="color:red;">*</span></label>
+                                            <input name='StandardBasedComments' type="text" ng-if="requestCtrl.Request.StandardBased < 100" ng-model="requestCtrl.Request.StandardBasedComments" autofocus ng-class="{'border-red' : requestCtrl.requestForm.StandardBasedComments.$touched &&  requestCtrl.requestForm.StandardBasedComments.$error.required }" required ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel">
+                                <legend>Validation Summary</legend>
+                                <div data-row-span="1">
+                                    <div data-field-span="1">
+                                        <fieldset>
+                                            <legend>Application</legend>
+                                            <div id="divApplicationQuestions">
+                                                <div ng-repeat="question in requestCtrl.GetQuestionList()['Application']" class="QuestionCss">
+                                                    <ng-include src="'_template/questionsView.html'"></ng-include>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div data-row-span="1">
+                                    <div data-field-span="1">
+                                        <fieldset>
+                                            <legend>Integration</legend>
+                                            <div id="divIntegrationQuestions">
+                                                <div ng-repeat="question in requestCtrl.GetQuestionList()['Integration']" class="QuestionCss">
+                                                    <ng-include src="'_template/questionsView.html'"></ng-include>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div data-row-span="1">
+                                    <div data-field-span="1">
+                                        <fieldset>
+                                            <legend>Database</legend>
+                                            <div id="divDatabaseQuestions">
+                                                <div ng-repeat="question in requestCtrl.GetQuestionList()['Database']" class="QuestionCss">
+                                                    <ng-include src="'_template/questionsView.html'"></ng-include>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div data-row-span="1">
+                                    <div data-field-span="1">
+                                        <fieldset>
+                                            <legend>Infrastructure</legend>
+                                            <div id="divInfrastructureQuestions">
+                                                <div ng-repeat="question in requestCtrl.GetQuestionList()['Infrastructure']" class="QuestionCss">
+                                                    <ng-include src="'_template/questionsView.html'"></ng-include>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div data-row-span="1">
+                                    <div data-field-span="1">
+                                        <fieldset>
+                                            <legend>Security</legend>
+                                            <div id="divSecurityQuestions">
+                                                <div ng-repeat="question in requestCtrl.GetQuestionList()['Security']" class="QuestionCss">
+                                                    <ng-include src="'_template/questionsView.html'"></ng-include>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div data-row-span="1">
+                                    <div data-field-span="1">
+                                        <fieldset>
+                                            <legend>Enterprise</legend>
+                                            <div id="divEAQuestions">
+                                                <div ng-repeat="question in requestCtrl.GetQuestionList()['Enterprise']" class="QuestionCss">
+                                                    <ng-include src="'_template/questionsView.html'"></ng-include>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Attachments</legend>
+                                <div data-row-span="1">
+                                    <div data-field-span="1">
+                                        <div id='divAttachments' class="col-md-12">
+                                            <span ng-show="requestCtrl.ShowAttachmentLoader">Checking Attachments...</span>
+                                            <div class="col-md-5" ng-repeat="attachment in requestCtrl.Request.Attachments"
+                                                 style="margin:5px;">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-default" ng-click="requestCtrl.OpenAttachment('api/Attachments/'+attachment.RequestID +'/RequestAttachments/'+ attachment.AttachmentLocation,attachment)">
+                                                        {{attachment.AttachmentName}}
+                                                    </button>
+                                                    <div class="btn-group" uib-dropdown on-toggle="toggled(open)">
+                                                        <button href="" class="btn btn-default" id="simple-dropdown" uib-dropdown-toggle>
+                                                            <span class="glyphicon glyphicon-option-vertical"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+
+                                                            <li role="menuitem"><a href="" ng-click="requestCtrl.OpenAttachment('api/Attachments/'+attachment.RequestID +'/RequestAttachments/'+ attachment.AttachmentLocation,attachment)"><i class="glyphicon glyphicon-download-alt" style="padding-right:15px"></i>Download</a></li>
+                                                            <li ng-if="!requestCtrl.CheckReviewer() && requestCtrl.Request.Stage<8" class="divider"></li>
+                                                            <li ng-if="!requestCtrl.CheckReviewer() && requestCtrl.Request.Stage<8" role="menuitem"><a href="" style="color:red" ng-click="requestCtrl.DeleteAttachments(attachment.RequestID,attachment)"><i class="glyphicon glyphicon-remove" style="padding-right:15px"></i>Delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <p ng-if="requestCtrl.Request.Attachments.length < 1"> No attchments found for this action item.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel">
+                                <legend>GHEA Standards Used</legend>
+                                <div data-row-span="2">
+                                    <div data-field-span="1">
+                                        <label style="font-size: smaller;"><b>Reference Architectures</b></label>
+                                        <div id="divRAs" ng-repeat="standard in requestCtrl.GetStandardList()">
+                                            <div ng-if="standard.GHEAStandardType=='RA'">
+                                                <input type="checkbox" ng-model="standard.selected" value="standard.GHEAStandardID">
+                                                <label style="padding: 5px;font-size: 0.8em">
+                                                    {{standard.GHEAStandardName}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-field-span="1">
+                                        <label style="font-size: smaller;">Solution Architectures</label>
+                                        <div id="divSAs" ng-repeat="standard in requestCtrl.GetStandardList()">
+                                            <div ng-if="standard.GHEAStandardType=='SA'">
+                                                <input type="checkbox" ng-model="standard.selected" value="standard.GHEAStandardID">
+                                                <label style="padding: 5px;font-size: 0.8em">
+                                                    {{standard.GHEAStandardName}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel">
+                                <legend>Event Logs</legend>
+                                <div id='divEventLogs' data-field-span='1'>
+                                    <table arb-data-table="requestCtrl.EventListOptions"></table>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <script type="text/ng-template" id="_template/questionsView.html">
+                <label></label>
+                <label style="font-weight: 200;"> {{question.QuestionText}} </label>
+                <span class='questionSpan pull-right' ng-class="{'color-red': requestCtrl.requestForm.Q{{question.QuestionID}}.$touched && requestCtrl.requestForm.Q{{question.QuestionID}}.$error.required}">
+                    <input type='radio' name='Q{{question.QuestionID}}' data-id='NA' ng-model="question.ResponseValue" value="Yes" ng-required="true" />Yes
+                    <input type='radio' name='Q{{question.QuestionID}}' data-id='NA' ng-model="question.ResponseValue" value="No" ng-required="true" />No
+                </span>
+
+                <textarea name='A{{question.QuestionID}}' ng-class="{'border-red':requestCtrl.requestForm.A{{question.QuestionID}}.$error.required}" tabindex="-1" id='{{question.QuestionID}}' placeholder="Comments" ng-model="question.ResposeAnswer" ng-required="question.ResponseValue==question.CommentOption || question.CommentOption=='Both'" ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel"></textarea>
+                <br />
+            </script>
+
+
+            <script type="text/ng-template" id="ARBPopup.html">
+                <label ng-class="{'color-red' : (requestCtrl.requestForm.SubmittedBy.$error.required || requestCtrl.requestForm.SubmittedBy.$error.email)}">Submitted By</label>
+                <div class="form-group">
+                    <input ng-disabled="!requestCtrl.PanelAuthorizeFlags.requestFormPanel" type="text" ng-model="requestCtrl.Request.EnteredBy" class="form-control">
+                </div>
+            </script>

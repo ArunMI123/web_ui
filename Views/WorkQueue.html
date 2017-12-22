@@ -1,0 +1,38 @@
+﻿<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-3" style="margin-left:-1%">
+            <label>Project ID</label>
+            <input class="form-control" type="text" tooltip-placement="top" uib-tooltip="ProjectID filter" name="ProjectID"  ng-model="dashboardCtrl.SearchData.ProjectID" all-caps-input  />
+        </div> 
+        <div class="col-md-3">
+            <label>Stage</label>
+            <select class="form-control"  tooltip-placement="top" uib-tooltip="Stage filter"  ng-model="dashboardCtrl.SearchData.Stage" convert-to-number>
+                <option value='' ng-disabled="true">Select One</option>
+                <option ng-repeat="Stage in dashboardCtrl.StageData" value="{{Stage.Key}}">{{Stage.Value}}</option>
+            </select>
+           
+        </div>
+        
+        <div class="col-md-3">
+            <label>Status</label>
+            <select class="form-control" tooltip-placement="top" uib-tooltip="Status filter"  ng-model="dashboardCtrl.SearchData.Status" >
+                <option value='' ng-disabled="true">Select One</option>
+                <option value='New'>New</option>
+                <option value='Open'>Open</option>
+                <option value='Closed'>Closed</option>
+            </select>
+        </div>
+        <div class="col-lg-3 col-md-6 col-xs-12 col-md-offset-0" style="padding-top:25px">
+            <div class="row">
+                <button  tooltip-placement="top" uib-tooltip="Search for projects based on filter entries" ng-click="dashboardCtrl.Search()"class="btn btn-success col-md-3">Search</button>
+                <button style="margin-left:10px"  tooltip-placement="top" uib-tooltip="Show All projects, regardless of filters"  ng-click="dashboardCtrl.Showall()"class="btn btn-primary col-md-3">ShowAll</button>
+                <button style="margin-left:10px"  tooltip-placement="top" uib-tooltip="Reset filters and return to default project list" ng-click="dashboardCtrl.Clear()" class="btn btn-danger col-md-3">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="row"  style=" overflow-x: auto;">
+        <table arb-data-table="dashboardCtrl.requestTableOptions"></table>
+    </div>
+</div>

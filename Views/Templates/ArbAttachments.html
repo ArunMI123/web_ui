@@ -1,0 +1,70 @@
+﻿<div ng-if="modalCtrl.IsUpload">
+    <div class="modal-header" style="padding:10px">
+        <h3 class="modal-title" id="modal-title">File Attachment</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <h4>Following files are attached successfully !</h4>
+        <ul>
+            <li ng-repeat="item in modalCtrl.Attachments">
+                {{ item.name }}
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="modalCtrl.Cancel()">OK</button>
+    </div>
+</div>
+
+<div ng-if="modalCtrl.IsDeleteFile">
+    <div class="modal-header" style="padding:10px">
+        <h3 class="modal-title" id="modal-title">{{modalCtrl.Header}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p>{{modalCtrl.Message}}</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" type="button" ng-click="modalCtrl.Ok()">Remove</button>
+        <button class="btn btn-default" type="button" ng-click="modalCtrl.Cancel()">Cancel</button>
+    </div>
+</div>
+
+<div ng-if="modalCtrl.IsJevent">
+    <div class="modal-header" style="padding:10px">
+        <h4 class="modal-title" id="modal-title">{{modalCtrl.Header}}</h4>
+    </div>
+    <div class="modal-body" id="modal-body">
+      
+         <p>{{modalCtrl.Message}}</p>
+</div>
+        <div class="modal-footer">
+            <button class="btn btn-danger" type="button" ng-click="modalCtrl.Ok()">OK</button>
+            <button class="btn btn-default" type="button" ng-click="modalCtrl.Cancel()">Cancel</button>
+        </div>
+
+    
+</div>
+
+<div ng-if="modalCtrl.IsCancel">
+    <div class="modal-header" style="padding:10px">
+        <h3 class="modal-title" id="modal-title">Discard Changes</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p>Are you sure want to discard the changes ?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" type="button" ng-click="modalCtrl.Ok()">OK</button>
+        <button class="btn btn-default" type="button" ng-click="modalCtrl.Cancel()">Cancel</button>
+    </div>
+</div>
+<div ng-if="modalCtrl.IsBack">
+    <div class="modal-header" style="padding:10px">
+        <h3 class="modal-title" id="modal-title">Changes will be discarded</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p>Do you really want to Leave?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" type="button" ng-click="modalCtrl.Ok()">OK</button>
+        <button class="btn btn-default" type="button" ng-click="modalCtrl.Cancel()">Cancel</button>
+    </div>
+</div>
